@@ -2,6 +2,13 @@
 
 Projeto acadêmico para criação e avaliação de um modelo de classificação de imagens utilizando o Google Teachable Machine.
 
+## Integrantes
+
+- Caio Barros Queiroz
+- Suellen Hellen Pereira Silva
+- Paulo Vitor Isidoro Silva
+- Kauê Cavalcanti Araujo
+
 ## Objetivo
 
 Treinar um modelo capaz de identificar diferentes utensílios de cozinha a partir de fotografias e avaliar seu desempenho com imagens não utilizadas no treinamento.
