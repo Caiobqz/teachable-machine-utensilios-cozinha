@@ -1,1 +1,1 @@
-# teachable-machine-utensilios-cozinha
+# Teachable Machine - Utensílios de Cozinha
