@@ -1,5 +1,5 @@
 # Classes utilizadas no projeto.
-CLASSES_VALIDAS = ["Garfo", "Panela", "Espátula"]
+CLASSES_VALIDAS = ["Garfo", "Panela", "Colher"]
 
 
 def normalizar_classe(texto):
@@ -10,8 +10,8 @@ def normalizar_classe(texto):
         return "Garfo"
     if texto == "panela":
         return "Panela"
-    if texto in ["espatula", "espátula"]:
-        return "Espátula"
+    if texto == "colher":
+        return "Colher"
 
     return None
 
@@ -22,14 +22,14 @@ def registrar_teste(resultados):
 
     classe_real = normalizar_classe(input("Classe real: "))
     if classe_real is None:
-        print("Classe inválida. Use Garfo, Panela ou Espátula.")
+        print("Classe inválida. Use Garfo, Panela ou Colher.")
         return
 
     classe_prevista = normalizar_classe(
         input("Classe prevista pelo modelo: ")
     )
     if classe_prevista is None:
-        print("Classe inválida. Use Garfo, Panela ou Espátula.")
+        print("Classe inválida. Use Garfo, Panela ou Colher.")
         return
 
     entrada_confianca = input("Confiança do modelo (%): ").strip()
