@@ -8,15 +8,15 @@ Criar um modelo capaz de classificar imagens de utensílios de cozinha e avaliar
 
 ## 2. Classes utilizadas
 
-As classes iniciais sugeridas são:
+As classes definidas pelo grupo são:
 
 - Garfo
 - Panela
-- Espátula
+- Colher
 
 ### Justificativa das classes
 
-As três classes foram escolhidas por apresentarem diferenças visuais claras de formato, tamanho e estrutura. Isso ajuda o grupo a observar se o modelo consegue aprender padrões visuais distintos antes de avançar para objetos mais parecidos entre si.
+As três classes foram escolhidas por apresentarem características visuais diferentes e por serem utensílios comuns de cozinha. Garfo e Colher permitem avaliar a distinção entre talheres visualmente semelhantes, enquanto Panela possui formato mais distinto.
 
 ## 3. Coleta de dados
 
@@ -43,9 +43,7 @@ As imagens devem:
 
 ## 4. Separação treino e teste
 
-As imagens de teste não podem ser as mesmas utilizadas no treinamento.
-
-O conjunto de treinamento serve para o modelo aprender. O conjunto de teste serve para verificar se o modelo consegue generalizar para imagens novas.
+As imagens de teste não podem ser as mesmas utilizadas no treinamento. O conjunto de treinamento serve para o modelo aprender, enquanto o conjunto de teste verifica se o modelo consegue generalizar para imagens novas.
 
 ## 5. Estrutura sugerida
 
@@ -54,11 +52,11 @@ imagens/
   treino/
     garfo/
     panela/
-    espatula/
+    colher/
   teste/
     garfo/
     panela/
-    espatula/
+    colher/
 ```
 
 ## 6. Treinamento no Teachable Machine
@@ -67,13 +65,19 @@ Criar um projeto do tipo `Image Project` e selecionar `Standard Image Model`.
 
 Criar as três classes e carregar apenas as imagens de treinamento.
 
+O modelo exportado pelo grupo confirma:
+
+- 3 classes: Colher, Garfo e Panela;
+- tamanho de entrada: 224 × 224 pixels;
+- 3 canais de cor (RGB);
+- formato de exportação TensorFlow.js;
+- Teachable Machine 2.4.16.
+
 O grupo deve registrar evidências das etapas principais por meio de prints.
 
 ## 7. Experimentos com hiperparâmetros
 
 Devem ser feitos pelo menos três treinamentos com configurações diferentes.
-
-Sugestão inicial:
 
 | Experimento | Epochs | Batch Size | Learning Rate |
 |---|---:|---:|---:|
@@ -81,7 +85,7 @@ Sugestão inicial:
 | 2 | 100 | 16 | 0.001 |
 | 3 | 100 | 32 | 0.001 |
 
-Os valores acima são pontos de partida. O grupo deve registrar os resultados reais obtidos em cada treinamento.
+Os valores acima são pontos de partida. O grupo deve registrar os resultados reais obtidos em cada treinamento e justificar qual configuração foi escolhida.
 
 ## 8. Avaliação
 
@@ -95,8 +99,6 @@ Cada imagem de teste deve registrar:
 
 ## 9. Cálculo de acurácia
 
-A acurácia será calculada por:
-
 ```text
 Acurácia = (quantidade de acertos / quantidade total de testes) × 100
 ```
@@ -105,13 +107,11 @@ Acurácia = (quantidade de acertos / quantidade total de testes) × 100
 
 Além da acurácia geral, registrar quantos acertos e erros ocorreram em cada classe.
 
-Exemplo:
-
 | Classe | Total testado | Acertos | Erros |
 |---|---:|---:|---:|
 | Garfo | 10 | preencher | preencher |
 | Panela | 10 | preencher | preencher |
-| Espátula | 10 | preencher | preencher |
+| Colher | 10 | preencher | preencher |
 
 ## 11. Análise crítica
 
@@ -119,20 +119,19 @@ A análise deve responder, com base nos dados reais:
 
 - qual classe teve melhor desempenho;
 - qual classe teve mais erros;
+- se Garfo e Colher foram confundidos;
 - quais tipos de imagem geraram dúvida;
 - se iluminação, fundo ou ângulo influenciaram;
 - se o modelo demonstrou confiança alta em algum erro;
 - se mais imagens poderiam melhorar o modelo;
 - quais limitações existiram no experimento.
 
-## 12. Limitações que devem ser registradas
-
-Possíveis limitações:
+## 12. Possíveis limitações
 
 - quantidade pequena de imagens;
-- poucas classes;
+- apenas três classes;
 - pouca variedade de ambientes;
-- objetos muito bem centralizados em comparação com uma situação real;
+- objetos muito centralizados;
 - imagens coletadas em condições parecidas;
 - desequilíbrio entre classes;
 - ausência de objetos parcialmente ocultos.
@@ -162,4 +161,4 @@ Guardar prints de:
 8. código Python funcionando;
 9. acurácia calculada.
 
-Este documento deve ser atualizado conforme os resultados reais do grupo forem sendo obtidos.
+Este documento deve ser atualizado conforme os resultados reais do grupo forem obtidos.
