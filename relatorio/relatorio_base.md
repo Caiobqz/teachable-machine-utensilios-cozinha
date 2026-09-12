@@ -1,14 +1,11 @@
 # Relatório — Classificação de Utensílios de Cozinha com Teachable Machine
 
-> Este arquivo reúne a estrutura do relatório final. Os campos marcados como **PREENCHER** ainda dependem dos dados acadêmicos finais ou da consolidação completa dos testes.
+> Este arquivo reúne a estrutura do relatório final. Os campos marcados como **PREENCHER** ainda dependem da consolidação completa dos testes.
 
 ## Capa
 
 **Instituição:** FIAP  
-**Disciplina:** PREENCHER  
 **Atividade:** Classificação de Utensílios de Cozinha com Inteligência Artificial  
-**Fase:** PREENCHER  
-**Capítulo:** PREENCHER  
 **Ano:** 2026
 
 ### Integrantes
@@ -162,7 +159,6 @@ A conclusão final deverá ser complementada com a acurácia consolidada calcula
 [x] código Python modularizado
 [x] RMs dos integrantes registrados
 [x] evidências e prints organizados
-[ ] fase, capítulo e disciplina preenchidos
 [ ] acurácia final consolidada
 [ ] print final do programa Python
 [ ] PDF final revisado
