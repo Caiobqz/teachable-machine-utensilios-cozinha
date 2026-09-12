@@ -6,7 +6,7 @@ Preencher apenas com dados reais observados no Teachable Machine.
 
 | Experimento | Epochs | Batch Size | Learning Rate | Resultado observado | Observações |
 |---|---:|---:|---:|---|---|
-| 1 | 50 | 16 | 0.001 | PREENCHER | PREENCHER |
+| 1 | 50 | 16 | 0.001 | Configuração confirmada por print | Há evidências com 160 imagens por classe e também prints de outro estado com 10 imagens por classe; não misturar os resultados |
 | 2 | 100 | 16 | 0.001 | PREENCHER | PREENCHER |
 | 3 | 100 | 32 | 0.001 | PREENCHER | PREENCHER |
 
@@ -68,7 +68,54 @@ Justificativa: **PREENCHER com base nos resultados reais.**
 | colher_09 | Colher | | | |
 | colher_10 | Colher | | | |
 
-## 4. Resultado geral
+## 4. Evidências recebidas até agora
+
+### Modelo com 160 imagens por classe
+
+Configuração confirmada:
+
+```text
+Colher: 160 imagens de treinamento
+Garfo: 160 imagens de treinamento
+Panela: 160 imagens de treinamento
+Epochs: 50
+Batch Size: 16
+Learning Rate: 0.001
+```
+
+Resultados visíveis nos prints recebidos:
+
+| Imagem observada | Previsão | Confiança visível | Observação |
+|---|---|---:|---|
+| Garfo isolado | Garfo | 100% | classificação correta aparente |
+| Conjunto de panelas | Panela | 100% | classificação correta aparente |
+
+### Outro estado do projeto com 10 imagens por classe
+
+Também foram recebidos prints mostrando:
+
+```text
+Colher: 10 imagens
+Garfo: 10 imagens
+Panela: 10 imagens
+Epochs: 50
+Batch Size: 16
+Learning Rate: 0.001
+```
+
+Resultados visíveis:
+
+| Imagem observada | Previsão principal | Confiança principal | Outras probabilidades visíveis |
+|---|---|---:|---|
+| Quatro garfos | Garfo | 71% | Colher 22%; Panela ~6% |
+| Conjunto de panelas | Panela | 100% | demais classes próximas de 0% |
+| Conjunto misto com panelas/talheres | Panela | 100% | demais classes próximas de 0% |
+| Cena de mesa com vários utensílios | Panela | 86% | Colher 13%; Garfo ~1% |
+| Conjunto majoritariamente de colheres | Garfo | 82% | Panela 13%; Colher ~6% |
+
+**Importante:** os prints de 10 imagens por classe não devem ser misturados com os resultados do modelo de 160 imagens por classe. Antes de calcular a acurácia final, o grupo deve definir qual conjunto/modelo será o oficial e realizar todos os testes finais nele.
+
+## 5. Resultado geral
 
 ```text
 Total de testes: PREENCHER
@@ -77,7 +124,7 @@ Erros: PREENCHER
 Acurácia: PREENCHER %
 ```
 
-## 5. Desempenho por classe
+## 6. Desempenho por classe
 
 | Classe | Total | Acertos | Erros | Acurácia |
 |---|---:|---:|---:|---:|
@@ -85,13 +132,8 @@ Acurácia: PREENCHER %
 | Panela | PREENCHER | PREENCHER | PREENCHER | PREENCHER |
 | Colher | PREENCHER | PREENCHER | PREENCHER | PREENCHER |
 
-## 6. Análise
+## 7. Análise preliminar
 
-Registrar:
+Os prints já indicam que imagens simples e centradas podem ser classificadas com confiança muito alta. Ao mesmo tempo, imagens com vários utensílios ou classes visualmente semelhantes podem reduzir a confiança ou gerar confusões, especialmente entre Garfo e Colher.
 
-- principais acertos;
-- erros relevantes;
-- possíveis causas dos erros;
-- se Garfo e Colher foram confundidos;
-- influência de iluminação, fundo e ângulo;
-- melhorias possíveis.
+Essa observação é preliminar. A análise final deve ser feita somente após os 30 testes oficiais usando o mesmo modelo.
