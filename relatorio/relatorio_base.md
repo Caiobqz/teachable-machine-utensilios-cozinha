@@ -1,6 +1,6 @@
 # Relatório — Classificação de Utensílios de Cozinha com Teachable Machine
 
-> Preencher os campos marcados como **PREENCHER** somente com dados reais do grupo.
+> Este arquivo reúne a estrutura do relatório final. Os campos marcados como **PREENCHER** ainda dependem dos dados acadêmicos finais ou da consolidação completa dos testes.
 
 ## Capa
 
@@ -9,48 +9,52 @@
 **Atividade:** Classificação de Utensílios de Cozinha com Inteligência Artificial  
 **Fase:** PREENCHER  
 **Capítulo:** PREENCHER  
-**Integrantes e RMs:** PREENCHER  
 **Ano:** 2026
+
+### Integrantes
+
+| Integrante | RM |
+|---|---:|
+| Caio Barros Queiroz | RM576443 |
+| Paulo Vitor Isidoro Silva | RM575580 |
+| Kauê Cavalcanti Araujo | RM576394 |
+| Suellen Hellen Pereira Silva | RM574778 |
 
 ---
 
 ## 1. Introdução
 
-A visão computacional permite que sistemas de inteligência artificial identifiquem padrões visuais em imagens. Neste projeto, foi utilizado o Google Teachable Machine para desenvolver um modelo capaz de classificar utensílios de cozinha em três categorias: Garfo, Panela e Colher. O trabalho envolveu coleta e separação de imagens, treinamento do modelo, experimentos com hiperparâmetros, testes com imagens inéditas e análise dos resultados.
+A visão computacional permite que sistemas de inteligência artificial identifiquem padrões visuais em imagens. Neste projeto, foi utilizado o Google Teachable Machine para desenvolver um modelo capaz de classificar utensílios de cozinha em três categorias: Garfo, Panela e Colher. O trabalho envolveu coleta e organização das imagens, treinamento do modelo, experimentação com diferentes configurações, testes com imagens novas e análise crítica dos resultados.
 
 ## 2. Objetivos
 
 - desenvolver um modelo capaz de classificar utensílios de cozinha a partir de fotografias;
 - aplicar conceitos básicos de aprendizado de máquina e visão computacional;
 - utilizar o Google Teachable Machine para treinamento e teste;
-- comparar diferentes configurações de treinamento;
-- avaliar acertos, erros, confiança e acurácia do modelo.
+- observar o impacto das configurações de treinamento;
+- avaliar acertos, erros, confiança e acurácia do modelo;
+- identificar limitações e possibilidades de melhoria.
 
 ## 3. Metodologia
 
-O projeto foi dividido em coleta de dados, treinamento, experimentação e avaliação. As classes utilizadas foram Garfo, Panela e Colher. As imagens foram divididas em conjuntos independentes de treinamento e teste para evitar que o modelo fosse avaliado com as mesmas imagens utilizadas no aprendizado.
+O projeto foi dividido em coleta de dados, treinamento, experimentação e avaliação. As classes utilizadas foram Garfo, Panela e Colher. O modelo principal foi construído com um conjunto equilibrado de **160 imagens de treinamento por classe**, totalizando **480 amostras**.
 
-### 3.1 Classes
+### 3.1 Classes e quantidade de treinamento
 
-- Garfo
-- Panela
-- Colher
+| Classe | Treinamento |
+|---|---:|
+| Garfo | 160 |
+| Panela | 160 |
+| Colher | 160 |
+| **Total** | **480** |
 
-### 3.2 Quantidade de imagens
+### 3.2 Critérios de seleção das imagens
 
-| Classe | Treinamento | Teste | Total |
-|---|---:|---:|---:|
-| Garfo | PREENCHER | PREENCHER | PREENCHER |
-| Panela | PREENCHER | PREENCHER | PREENCHER |
-| Colher | PREENCHER | PREENCHER | PREENCHER |
+As imagens foram selecionadas buscando boa iluminação, foco adequado e presença clara do utensílio principal. Também foram consideradas variações de ângulo, distância, posição, fundo e aparência dos objetos para reduzir a dependência de padrões específicos do cenário.
 
-### 3.3 Critérios de seleção
+As imagens utilizadas para avaliação devem permanecer separadas das imagens de treinamento.
 
-As imagens foram selecionadas buscando boa iluminação, foco adequado e presença clara do utensílio principal. Também foram utilizadas variações de ângulo, distância, posição, fundo e iluminação para reduzir a dependência de padrões específicos do cenário.
-
-**Adicionar aqui um print da organização das imagens.**
-
-## 4. Configuração do modelo
+## 4. Configuração técnica do modelo
 
 Foi utilizado o Google Teachable Machine na modalidade `Image Project` com `Standard Image Model`.
 
@@ -65,39 +69,31 @@ O modelo exportado confirmou:
 | Formato exportado | TensorFlow.js |
 | Teachable Machine | 2.4.16 |
 
-**Adicionar print das três classes carregadas no Teachable Machine.**
-
 ## 5. Experimentos de treinamento
 
-Foram realizados treinamentos alterando Epochs, Batch Size e Learning Rate.
+As seguintes configurações foram confirmadas por prints do modelo principal:
 
-| Experimento | Epochs | Batch Size | Learning Rate | Resultado observado |
+| Configuração | Epochs | Batch Size | Learning Rate | Situação |
 |---|---:|---:|---:|---|
-| 1 | 50 | 16 | 0.001 | PREENCHER |
-| 2 | 100 | 16 | 0.001 | PREENCHER |
-| 3 | 100 | 32 | 0.001 | PREENCHER |
+| A | 50 | 16 | 0.001 | Confirmada por múltiplos testes |
+| B | 70 | 32 | 0.001 | Confirmada por teste |
 
-**Adicionar prints das configurações e dos resultados de cada experimento.**
+A comparação deve considerar não apenas se a classificação foi correta, mas também a confiança apresentada pelo modelo e a estabilidade diante de imagens diferentes.
 
-### 5.1 Configuração escolhida
+## 6. Testes documentados
 
-```text
-Epochs: PREENCHER
-Batch Size: PREENCHER
-Learning Rate: PREENCHER
-```
+Entre as evidências registradas no modelo principal, foram observados:
 
-**Justificativa:** PREENCHER com base nos resultados reais observados.
+| Situação | Classe esperada | Previsão | Confiança | Resultado |
+|---|---|---|---:|---|
+| Garfo isolado | Garfo | Garfo | 100% | Acerto |
+| Conjunto de panelas | Panela | Panela | 100% | Acerto |
+| Cena com panelas visualmente dominantes | Panela | Panela | 98% | Acerto aparente |
+| Garfos na Configuração B | Garfo | Garfo | 72% | Acerto |
 
-## 6. Testes com imagens inéditas
+Os prints correspondentes devem ser inseridos no PDF final como evidência do comportamento do modelo.
 
-O modelo final foi testado utilizando imagens que não fizeram parte do conjunto de treinamento.
-
-Quantidade total de testes: **PREENCHER**.
-
-**Adicionar prints de pelo menos um teste de Garfo, um de Panela, um de Colher e um erro relevante, caso ocorra.**
-
-## 7. Resultados
+## 7. Resultados finais
 
 ### 7.1 Resultado geral
 
@@ -108,7 +104,7 @@ Erros: PREENCHER
 Acurácia: PREENCHER %
 ```
 
-A acurácia foi calculada pela fórmula:
+A acurácia será calculada pela fórmula:
 
 ```text
 Acurácia = (acertos / total de testes) × 100
@@ -122,83 +118,53 @@ Acurácia = (acertos / total de testes) × 100
 | Panela | PREENCHER | PREENCHER | PREENCHER | PREENCHER |
 | Colher | PREENCHER | PREENCHER | PREENCHER | PREENCHER |
 
-**Adicionar print do programa Python mostrando a acurácia e o desempenho por classe.**
+## 8. Justificativa técnica
 
-## 8. Justificativa técnica dos resultados
+Os testes já documentados indicam que a classe Panela apresentou comportamento consistente e previsões com confiança elevada. Garfo e Colher possuem maior semelhança visual, pois são objetos alongados e podem aparecer em posições e fundos semelhantes, o que pode reduzir a confiança do modelo.
 
-PREENCHER após os testes. A análise deve relacionar os resultados com fatores como:
+Também foi observado que cenas com vários utensílios podem fazer o classificador priorizar a classe visualmente dominante, já que o modelo realiza classificação da imagem inteira e não detecção individual de cada objeto presente.
 
-- diversidade das imagens;
-- iluminação;
-- fundo;
-- ângulo;
-- semelhança visual entre Garfo e Colher;
-- quantidade de exemplos;
-- configuração de treinamento.
+## 9. Análise crítica
 
-## 9. Análise dos erros
+A análise final deve considerar:
 
-Registrar os principais erros observados.
+- qual classe apresentou maior estabilidade;
+- quais classes apresentaram maior semelhança visual;
+- influência de fundo, iluminação, distância e ângulo;
+- diferenças de confiança entre as configurações testadas;
+- desempenho em imagens inéditas;
+- limitações do conjunto de dados.
 
-Exemplo de estrutura:
+## 10. Sugestões de melhoria
 
-```text
-Imagem: PREENCHER
-Classe real: PREENCHER
-Classe prevista: PREENCHER
-Confiança: PREENCHER
-Possível causa: PREENCHER
-```
+- ampliar o conjunto de imagens de teste;
+- aumentar a diversidade de Garfo e Colher;
+- incluir diferentes condições de iluminação;
+- variar ainda mais fundo, distância e ângulo;
+- testar objetos parcialmente ocultos;
+- evitar cenas com várias classes no cálculo da acurácia de objeto único;
+- registrar todos os testes no CSV para tornar a avaliação reproduzível.
 
-## 10. Análise crítica
+## 11. Conclusão
 
-Responder com base nos dados reais:
+O projeto demonstrou que o Google Teachable Machine pode ser utilizado para construir um classificador de imagens de maneira acessível. O modelo principal foi treinado de forma balanceada com 160 imagens por classe e apresentou resultados especialmente consistentes para Panela. Os testes também mostraram que a confiança pode variar conforme a semelhança visual entre as classes e a configuração de treinamento.
 
-- qual classe teve melhor desempenho;
-- qual teve pior desempenho;
-- quais confusões ocorreram;
-- se fundo, iluminação ou ângulo influenciaram;
-- se houve previsão errada com confiança alta;
-- se os dados foram suficientes;
-- se o modelo generalizou para imagens novas.
-
-## 11. Sugestões de melhoria
-
-Possíveis melhorias, desde que relacionadas aos resultados observados:
-
-- aumentar o número de imagens;
-- variar mais os fundos;
-- variar iluminação e distância;
-- incluir mais ângulos;
-- incluir objetos parcialmente ocultos;
-- equilibrar rigorosamente as classes;
-- repetir treinamentos com outras configurações;
-- incluir novos utensílios em versões futuras.
-
-## 12. Conclusão
-
-PREENCHER somente após os testes finais. A conclusão deve informar se o objetivo foi atingido, a acurácia final, principais pontos fortes, limitações e próximos passos.
+A conclusão final deverá ser complementada com a acurácia consolidada calculada a partir do conjunto completo de testes inéditos.
 
 ---
 
-## Checklist de evidências do PDF
+## Checklist antes da entrega
 
 ```text
-[ ] classes criadas
-[ ] imagens carregadas
-[ ] separação treino/teste explicada
-[ ] configurações avançadas
-[ ] experimento 1
-[ ] experimento 2
-[ ] experimento 3
-[ ] configuração final justificada
-[ ] testes de Garfo
-[ ] testes de Panela
-[ ] testes de Colher
-[ ] erro do modelo, se houver
-[ ] acurácia final
-[ ] desempenho por classe
-[ ] programa Python
-[ ] análise crítica
-[ ] conclusão
+[x] classes Garfo, Panela e Colher definidas
+[x] modelo principal com 160 imagens por classe
+[x] modelo exportado
+[x] código Python modularizado
+[x] RMs dos integrantes registrados
+[x] evidências e prints organizados
+[ ] fase, capítulo e disciplina preenchidos
+[ ] acurácia final consolidada
+[ ] print final do programa Python
+[ ] PDF final revisado
+[ ] nome do arquivo conforme padrão da faculdade
 ```
