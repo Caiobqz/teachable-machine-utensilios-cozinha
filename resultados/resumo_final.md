@@ -1,125 +1,100 @@
 # Resumo Final dos Resultados
 
-Preencher este arquivo apenas com dados obtidos nos testes reais do projeto.
+Este documento consolida os dados confirmados ate o momento para a entrega do projeto.
 
-## 1. Quantidade de imagens
+## 1. Conjunto principal de treinamento
 
-| Classe | Treino | Teste | Total |
-|---|---:|---:|---:|
-| Garfo | preencher | preencher | preencher |
-| Panela | preencher | preencher | preencher |
-| Colher | preencher | preencher | preencher |
+| Classe | Imagens de treinamento |
+|---|---:|
+| Garfo | 160 |
+| Panela | 160 |
+| Colher | 160 |
 
-## 2. Configuração escolhida
+Total de imagens de treinamento no modelo principal: **480**.
 
-```text
-Epochs: preencher
-Batch Size: preencher
-Learning Rate: preencher
-```
-
-Justificativa da escolha:
-
-> Explicar por que essa configuração foi escolhida com base nos resultados observados.
-
-## 3. Informações técnicas do modelo exportado
+## 2. Informacoes tecnicas do modelo exportado
 
 ```text
 Classes: Colher, Garfo e Panela
 Quantidade de classes: 3
-Tamanho de entrada: 224 × 224 pixels
+Tamanho de entrada: 224 x 224 pixels
 Canais: RGB
 Teachable Machine: 2.4.16
 Formato exportado: TensorFlow.js
 ```
 
-## 4. Resultado geral
+## 3. Configuracoes realmente documentadas
+
+| Configuracao | Epochs | Batch Size | Learning Rate | Evidencia |
+|---|---:|---:|---:|---|
+| A | 50 | 16 | 0.001 | varios prints do modelo de 160 imagens por classe |
+| B | 70 | 32 | 0.001 | print do modelo de 160 imagens por classe |
+
+## 4. Resultados observados no modelo principal
+
+Na configuracao A foram documentados:
+
+- Garfo isolado classificado como Garfo com 100%;
+- conjunto de panelas classificado como Panela com 100%;
+- cena com panelas e outros utensilios classificada como Panela com 98%;
+- outros tres exemplos de conjuntos de panelas classificados como Panela com 100%.
+
+Na configuracao B foi documentado:
+
+- imagem com quatro garfos classificada como Garfo com 72%;
+- Colher recebeu 15% e Panela 14%, demonstrando maior incerteza da previsao.
+
+## 5. Interpretacao dos resultados
+
+Os exemplos documentados indicam desempenho particularmente forte para a classe Panela, com confiancas entre 98% e 100% nos testes apresentados. Garfo tambem foi reconhecido corretamente, mas a configuracao com 70 epochs e batch size 32 apresentou confianca menor de 72% em um dos testes.
+
+Garfo e Colher possuem maior semelhanca visual entre si do que em relacao a Panela. Isso ajuda a explicar a maior distribuicao de probabilidades entre essas classes em imagens mais dificeis.
+
+Imagens contendo diversos utensilios simultaneamente devem ser interpretadas com cuidado, pois o modelo realiza classificacao de imagem e nao deteccao individual de todos os objetos presentes. Nesses casos, ele tende a escolher a classe visualmente dominante.
+
+## 6. Comparacao com o modelo menor
+
+Tambem foram testados exemplos de um modelo anterior com apenas 10 imagens por classe. Esse modelo apresentou varios acertos isolados, mas tambem houve um caso de confusao relevante no qual uma imagem majoritariamente de colheres foi classificada como Garfo com 82% de confianca.
+
+Essa evidencia reforca a importancia de um conjunto de treinamento maior e mais variado.
+
+## 7. Limitacao para a acuracia final
+
+Os prints recebidos nao constituem um conjunto final equilibrado e completo de testes ineditos das tres classes no mesmo modelo. Por esse motivo, ainda nao e metodologicamente correto declarar uma acuracia geral oficial apenas com esses registros.
+
+A acuracia final deve ser obtida a partir do conjunto completo de testes ineditos, usando:
 
 ```text
-Total de testes: preencher
-Acertos: preencher
-Erros: preencher
-Acurácia final: preencher %
+Acuracia = (acertos / total de testes) x 100
 ```
 
-## 5. Desempenho por classe
+## 8. Analise critica
 
-| Classe | Testados | Acertos | Erros | Taxa de acerto |
-|---|---:|---:|---:|---:|
-| Garfo | preencher | preencher | preencher | preencher |
-| Panela | preencher | preencher | preencher | preencher |
-| Colher | preencher | preencher | preencher | preencher |
+Pontos fortes observados:
 
-## 6. Principais acertos
+- alta confianca na classe Panela;
+- capacidade de reconhecer diferentes formatos de panelas;
+- classificacao correta de Garfo em exemplos simples;
+- conjunto principal de treinamento equilibrado, com 160 imagens por classe.
 
-Para cada exemplo relevante:
+Pontos de atencao:
 
-```text
-Imagem:
-Classe real:
-Classe prevista:
-Confiança:
-Observação:
-```
+- maior semelhanca visual entre Garfo e Colher;
+- confianca menor em alguns exemplos de Garfo;
+- cenas com varios tipos de utensilios geram ambiguidade;
+- classificacao de imagem nao equivale a localizar todos os objetos da cena.
 
-## 7. Principais erros
+## 9. Melhorias propostas
 
-Não remover erros do relatório. Para cada erro relevante:
+- aumentar a variedade de Garfos e Colheres;
+- incluir fundos e iluminacoes ainda mais diferentes;
+- adicionar imagens com objetos parcialmente ocultos;
+- evitar excesso de cenas contendo diversas classes simultaneamente nos testes de acuracia;
+- repetir experimentos alterando um hiperparametro por vez;
+- manter o conjunto de teste separado do treinamento.
 
-```text
-Imagem:
-Classe real:
-Classe prevista:
-Confiança:
-Possível causa do erro:
-```
+## 10. Conclusao preliminar
 
-## 8. Confiança das previsões
+O modelo demonstrou capacidade de diferenciar Garfo, Panela e Colher, com resultados especialmente consistentes para Panela. Os testes tambem mostraram que a confianca pode variar conforme a configuracao do treinamento e a composicao da imagem. A principal dificuldade observada envolve a semelhanca visual entre Garfo e Colher e cenas com varios utensilios ao mesmo tempo.
 
-Analisar se o modelo:
-
-- apresentou alta confiança nos acertos;
-- apresentou baixa confiança em imagens difíceis;
-- apresentou alta confiança em algum erro;
-- demonstrou diferença de confiança entre classes.
-
-## 9. Comparação dos experimentos
-
-| Experimento | Epochs | Batch Size | Learning Rate | Resultado observado | Observações |
-|---|---:|---:|---:|---|---|
-| 1 | 50 | 16 | 0.001 | preencher | preencher |
-| 2 | 100 | 16 | 0.001 | preencher | preencher |
-| 3 | 100 | 32 | 0.001 | preencher | preencher |
-
-## 10. Análise crítica
-
-Responder com base nos testes reais:
-
-1. Qual classe foi reconhecida com mais facilidade?
-2. Qual classe apresentou mais erros?
-3. Garfo e Colher foram confundidos com frequência?
-4. O fundo influenciou as previsões?
-5. A iluminação influenciou?
-6. O ângulo do objeto teve impacto?
-7. O modelo funcionou bem com imagens realmente novas?
-8. O conjunto de treinamento foi variado o suficiente?
-
-## 11. Limitações observadas
-
-Registrar apenas limitações que realmente fizeram parte do experimento.
-
-## 12. Melhorias propostas
-
-Relacionar as melhorias diretamente aos problemas encontrados.
-
-## 13. Conclusão
-
-A conclusão deve responder:
-
-- o modelo cumpriu o objetivo?
-- qual foi a acurácia final?
-- quais foram os principais pontos fortes?
-- quais foram as principais limitações?
-- o que seria feito em uma próxima versão?
-
-> Não preencher resultados antes da realização dos testes reais.
+A conclusao definitiva do trabalho deve incluir a acuracia calculada a partir do conjunto completo de testes ineditos.
