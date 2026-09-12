@@ -1,139 +1,88 @@
 # Registro dos Experimentos e Testes
 
-Preencher apenas com dados reais observados no Teachable Machine.
+Este arquivo reúne somente dados realmente observados nos prints e arquivos exportados do projeto.
 
-## 1. Treinamentos
+## 1. Modelo principal
 
-| Experimento | Epochs | Batch Size | Learning Rate | Resultado observado | Observações |
-|---|---:|---:|---:|---|---|
-| 1 | 50 | 16 | 0.001 | Configuração confirmada por print | Há evidências com 160 imagens por classe e também prints de outro estado com 10 imagens por classe; não misturar os resultados |
-| 2 | 100 | 16 | 0.001 | PREENCHER | PREENCHER |
-| 3 | 100 | 32 | 0.001 | PREENCHER | PREENCHER |
+O modelo principal definido para a entrega é o treinado com **160 imagens por classe**:
 
-## 2. Configuração escolhida
+- Garfo: 160 imagens de treinamento;
+- Panela: 160 imagens de treinamento;
+- Colher: 160 imagens de treinamento.
 
-```text
-Experimento escolhido: PREENCHER
-Epochs: PREENCHER
-Batch Size: PREENCHER
-Learning Rate: PREENCHER
-```
+O modelo exportado possui entrada de 224 x 224 pixels em RGB e três classes: Garfo, Panela e Colher.
 
-Justificativa: **PREENCHER com base nos resultados reais.**
+## 2. Configuracoes de treinamento confirmadas
 
-## 3. Testes com imagens inéditas
+| Experimento | Epochs | Batch Size | Learning Rate | Situacao |
+|---|---:|---:|---:|---|
+| A | 50 | 16 | 0.001 | confirmado por varios prints do modelo de 160 imagens/classe |
+| B | 70 | 32 | 0.001 | confirmado por print do modelo de 160 imagens/classe |
 
-### Garfo
+Nao foram recebidas evidencias suficientes para registrar como reais as configuracoes 100/16/0.001 e 100/32/0.001. Elas nao devem ser apresentadas como executadas sem novos prints.
 
-| Imagem | Classe real | Previsão | Confiança | Acertou? |
-|---|---|---|---:|---|
-| garfo_01 | Garfo | | | |
-| garfo_02 | Garfo | | | |
-| garfo_03 | Garfo | | | |
-| garfo_04 | Garfo | | | |
-| garfo_05 | Garfo | | | |
-| garfo_06 | Garfo | | | |
-| garfo_07 | Garfo | | | |
-| garfo_08 | Garfo | | | |
-| garfo_09 | Garfo | | | |
-| garfo_10 | Garfo | | | |
+## 3. Testes documentados - modelo de 160 imagens por classe
 
-### Panela
+### Configuracao A - 50 epochs, batch 16, learning rate 0.001
 
-| Imagem | Classe real | Previsão | Confiança | Acertou? |
-|---|---|---|---:|---|
-| panela_01 | Panela | | | |
-| panela_02 | Panela | | | |
-| panela_03 | Panela | | | |
-| panela_04 | Panela | | | |
-| panela_05 | Panela | | | |
-| panela_06 | Panela | | | |
-| panela_07 | Panela | | | |
-| panela_08 | Panela | | | |
-| panela_09 | Panela | | | |
-| panela_10 | Panela | | | |
+| Teste | Conteudo da imagem | Classe esperada/predominante | Previsao | Confianca | Resultado |
+|---|---|---|---|---:|---|
+| A1 | Garfo isolado | Garfo | Garfo | 100% | Acerto |
+| A2 | Conjunto de panelas | Panela | Panela | 100% | Acerto |
+| A3 | Cena com panelas e outros utensilios | Panela (predominante) | Panela | 98% | Acerto aparente |
+| A4 | Conjunto de panelas/recipientes | Panela | Panela | 100% | Acerto |
+| A5 | Conjunto de panelas de pressao | Panela | Panela | 100% | Acerto |
+| A6 | Panelas e frigideiras | Panela | Panela | 100% | Acerto |
 
-### Colher
+### Configuracao B - 70 epochs, batch 32, learning rate 0.001
 
-| Imagem | Classe real | Previsão | Confiança | Acertou? |
-|---|---|---|---:|---|
-| colher_01 | Colher | | | |
-| colher_02 | Colher | | | |
-| colher_03 | Colher | | | |
-| colher_04 | Colher | | | |
-| colher_05 | Colher | | | |
-| colher_06 | Colher | | | |
-| colher_07 | Colher | | | |
-| colher_08 | Colher | | | |
-| colher_09 | Colher | | | |
-| colher_10 | Colher | | | |
+| Teste | Conteudo da imagem | Classe esperada | Previsao | Confianca | Outras probabilidades visiveis | Resultado |
+|---|---|---|---|---:|---|---|
+| B1 | Quatro garfos | Garfo | Garfo | 72% | Colher 15%; Panela 14% | Acerto |
 
-## 4. Evidências recebidas até agora
+## 4. Observacoes importantes
 
-### Modelo com 160 imagens por classe
+- A classe **Panela** apresentou classificacoes muito seguras nos exemplos documentados, normalmente entre 98% e 100%.
+- O teste de Garfo com a configuracao 70/32/0.001 foi correto, mas a confianca caiu para 72%, mostrando maior incerteza do modelo.
+- Cenas com varios objetos nao constituem um teste ideal de classificacao de objeto unico. Nelas, o modelo tende a selecionar a classe visualmente dominante.
+- Garfo e Colher sao visualmente mais semelhantes entre si do que Panela, o que pode elevar a ambiguidade em alguns casos.
 
-Configuração confirmada:
+## 5. Modelo de 10 imagens por classe - apenas comparacao
 
-```text
-Colher: 160 imagens de treinamento
-Garfo: 160 imagens de treinamento
-Panela: 160 imagens de treinamento
-Epochs: 50
-Batch Size: 16
-Learning Rate: 0.001
-```
+Tambem foram documentados testes de um modelo anterior com apenas 10 imagens de treinamento por classe. Esses resultados **nao devem ser misturados** com o modelo principal de 160 imagens por classe.
 
-Resultados visíveis nos prints recebidos:
+Exemplos observados nesse modelo menor:
 
-| Imagem observada | Previsão | Confiança visível | Observação |
+| Classe real | Previsao | Confianca | Resultado |
 |---|---|---:|---|
-| Garfo isolado | Garfo | 100% | classificação correta aparente |
-| Conjunto de panelas | Panela | 100% | classificação correta aparente |
+| Garfo | Garfo | 99% | Acerto |
+| Panela | Panela | 98% | Acerto |
+| Colher | Colher | 86% | Acerto |
+| Colher | Colher | 93% | Acerto |
+| Garfo | Garfo | 100% | Acerto |
 
-### Outro estado do projeto com 10 imagens por classe
+Tambem foi observado anteriormente um caso em que uma imagem majoritariamente de colheres foi classificada como Garfo com 82%, evidenciando a possibilidade de confusao entre as duas classes.
 
-Também foram recebidos prints mostrando:
+## 6. Acuracia
 
-```text
-Colher: 10 imagens
-Garfo: 10 imagens
-Panela: 10 imagens
-Epochs: 50
-Batch Size: 16
-Learning Rate: 0.001
-```
+Os prints recebidos permitem afirmar que os exemplos documentados acima foram classificados conforme indicado, mas **nao formam um conjunto final equilibrado de testes suficiente para calcular uma acuracia oficial geral do projeto**.
 
-Resultados visíveis:
+Para uma acuracia final academica confiavel, deve-se usar somente testes ineditos do mesmo modelo e registrar o total de acertos dividido pelo total de testes.
 
-| Imagem observada | Previsão principal | Confiança principal | Outras probabilidades visíveis |
-|---|---|---:|---|
-| Quatro garfos | Garfo | 71% | Colher 22%; Panela ~6% |
-| Conjunto de panelas | Panela | 100% | demais classes próximas de 0% |
-| Conjunto misto com panelas/talheres | Panela | 100% | demais classes próximas de 0% |
-| Cena de mesa com vários utensílios | Panela | 86% | Colher 13%; Garfo ~1% |
-| Conjunto majoritariamente de colheres | Garfo | 82% | Panela 13%; Colher ~6% |
-
-**Importante:** os prints de 10 imagens por classe não devem ser misturados com os resultados do modelo de 160 imagens por classe. Antes de calcular a acurácia final, o grupo deve definir qual conjunto/modelo será o oficial e realizar todos os testes finais nele.
-
-## 5. Resultado geral
+Formula:
 
 ```text
-Total de testes: PREENCHER
-Acertos: PREENCHER
-Erros: PREENCHER
-Acurácia: PREENCHER %
+Acuracia = (acertos / total de testes) x 100
 ```
 
-## 6. Desempenho por classe
+## 7. Evidencias recomendadas para o PDF
 
-| Classe | Total | Acertos | Erros | Acurácia |
-|---|---:|---:|---:|---:|
-| Garfo | PREENCHER | PREENCHER | PREENCHER | PREENCHER |
-| Panela | PREENCHER | PREENCHER | PREENCHER | PREENCHER |
-| Colher | PREENCHER | PREENCHER | PREENCHER | PREENCHER |
+Usar no relatorio:
 
-## 7. Análise preliminar
-
-Os prints já indicam que imagens simples e centradas podem ser classificadas com confiança muito alta. Ao mesmo tempo, imagens com vários utensílios ou classes visualmente semelhantes podem reduzir a confiança ou gerar confusões, especialmente entre Garfo e Colher.
-
-Essa observação é preliminar. A análise final deve ser feita somente após os 30 testes oficiais usando o mesmo modelo.
+1. print mostrando as 160 imagens por classe;
+2. print da configuracao 50 / 16 / 0.001;
+3. exemplo de Garfo com 100%;
+4. exemplos de Panela com 98% e 100%;
+5. print da configuracao 70 / 32 / 0.001 com Garfo em 72%;
+6. explicacao sobre a queda de confianca e possivel confusao entre Garfo e Colher;
+7. print do programa Python quando a acuracia final for calculada.
