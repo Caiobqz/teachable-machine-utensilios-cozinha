@@ -1,433 +1,262 @@
 # Como começar a trabalhar no projeto
 
-Este guia foi feito para quem está começando agora e ainda não tem experiência com GitHub, Teachable Machine ou organização de um projeto em grupo.
+Este guia organiza o trabalho do grupo para o projeto de classificação de utensílios com Google Teachable Machine.
 
-A regra mais importante é: **cada pessoa deve começar apenas pela sua etapa e entregar evidências claras para a próxima pessoa continuar**.
+## Objetivo
 
----
-
-## Antes de qualquer coisa — todos devem fazer isso
-
-### 1. Ler o README
-
-Abra o `README.md` do repositório e leia a parte de etapas do projeto.
-
-O objetivo é entender o fluxo completo antes de mexer em qualquer coisa.
-
-### 2. Entender o objetivo do trabalho
-
-O grupo precisa criar um modelo no Google Teachable Machine capaz de classificar utensílios de cozinha em três classes:
+Criar, testar e avaliar um modelo capaz de classificar três utensílios:
 
 - Garfo
 - Panela
-- Espátula
+- Colher
 
-Depois, o grupo deve testar o modelo, analisar seus erros, calcular a acurácia e documentar tudo em PDF.
-
-### 3. Não trabalhar com arquivos aleatórios
-
-Cada integrante deve salvar seus arquivos dentro da estrutura do projeto.
-
-Exemplo:
-
-```text
-imagens/
-resultados/
-prints/
-docs/
-codigo/
-relatorio/
-```
-
-### 4. Sempre registrar o que foi feito
-
-Ao terminar uma etapa, a pessoa deve deixar claro:
-
-- o que fez;
-- quais arquivos criou ou alterou;
-- quais resultados obteve;
-- quais prints tirou;
-- o que a próxima pessoa precisa fazer.
+Depois, registrar os resultados, calcular a acurácia e documentar tudo em um relatório PDF.
 
 ---
 
-# Suellen Hellen Pereira Silva — como começar
+# 1. Suellen Hellen Pereira Silva — imagens
 
-## Sua responsabilidade
+## Responsabilidade
 
-Preparar as imagens que serão usadas para treinamento e teste do modelo.
+Preparar as imagens de treinamento e teste.
 
-Essa etapa é essencial porque um modelo ruim geralmente começa com dados ruins.
+## Como fazer
 
-## O que fazer primeiro
-
-1. Separe três grupos de objetos:
-   - garfos;
-   - panelas;
-   - espátulas.
-2. Tire ou separe várias imagens de cada tipo.
-3. Evite usar imagens muito parecidas entre si.
-4. Varie:
-   - posição do objeto;
-   - distância;
-   - iluminação;
-   - fundo;
-   - ângulo;
-   - orientação.
-5. Evite imagens:
-   - borradas;
-   - muito escuras;
-   - com vários objetos juntos;
-   - em que o utensílio quase não aparece.
-
-## Quantidade sugerida
-
-Tente montar aproximadamente:
-
-```text
-Garfo: 30 treino + 10 teste
-Panela: 30 treino + 10 teste
-Espátula: 30 treino + 10 teste
-```
-
-Total aproximado:
-
-```text
-90 imagens de treinamento
-30 imagens de teste
-```
-
-## Cuidado mais importante
-
-Uma imagem usada no treinamento **não pode ser usada novamente no teste**.
-
-O teste deve mostrar se o modelo consegue reconhecer imagens novas.
-
-## Onde organizar
+1. Separar imagens de Garfo, Panela e Colher.
+2. Tentar usar aproximadamente 30 imagens de treino e 10 de teste por classe.
+3. Variar ângulo, posição, distância, fundo e iluminação.
+4. Evitar imagens borradas, muito escuras, repetidas ou com muitos objetos extras.
+5. Não usar a mesma imagem em treino e teste.
+6. Organizar assim:
 
 ```text
 imagens/treino/garfo/
 imagens/treino/panela/
-imagens/treino/espatula/
+imagens/treino/colher/
 
 imagens/teste/garfo/
 imagens/teste/panela/
-imagens/teste/espatula/
+imagens/teste/colher/
 ```
 
-## O que você deve entregar ao grupo
+## Entrega
 
-Ao terminar, informe:
-
-- quantas imagens de treino existem em cada classe;
-- quantas imagens de teste existem em cada classe;
-- se todas foram revisadas;
-- se treino e teste estão separados corretamente.
-
-Também guarde pelo menos um print mostrando a organização das imagens.
+- quantidade real de imagens por classe;
+- confirmação de separação treino/teste;
+- prints da organização;
+- observações sobre qualidade das imagens.
 
 ---
 
-# Paulo Vitor Isidoro Silva — como começar
+# 2. Paulo Vitor Isidoro Silva — modelo inicial
 
-## Sua responsabilidade
+## Responsabilidade
 
-Criar o projeto no Google Teachable Machine e fazer o primeiro treinamento.
+Criar o projeto no Teachable Machine e realizar o treinamento inicial.
 
-## O que você precisa receber antes
+## Como fazer
 
-Não comece antes de Suellen concluir a organização das imagens de treinamento.
+1. Acessar o Google Teachable Machine.
+2. Escolher `Image Project`.
+3. Escolher `Standard Image Model`.
+4. Criar as classes Garfo, Panela e Colher.
+5. Carregar somente imagens de treinamento.
+6. Conferir se cada imagem está na classe correta.
+7. Fazer o treinamento inicial.
+8. Testar rapidamente as três classes.
 
-## Passo a passo
-
-1. Acesse o Google Teachable Machine.
-2. Clique em `Get Started`.
-3. Escolha `Image Project`.
-4. Escolha `Standard Image Model`.
-5. Crie três classes:
-   - Garfo;
-   - Panela;
-   - Espátula.
-6. Carregue apenas as imagens da pasta de treino.
-7. Confira se cada imagem foi colocada na classe correta.
-8. Faça o primeiro treinamento.
-9. Observe se o modelo consegue diferenciar as classes.
-
-## O que registrar
-
-Tire prints de:
+## Prints necessários
 
 - classes criadas;
 - imagens carregadas;
-- tela antes do treinamento;
+- tela de treinamento;
 - treinamento concluído;
-- primeira prévia de classificação.
+- exemplo de previsão.
 
-## O que não fazer
+## Entrega
 
-- Não misturar imagens de teste com treinamento.
-- Não apagar prints depois.
-- Não alterar muitas configurações avançadas ainda; isso será trabalhado na etapa do Kauê.
-
-## O que você deve entregar ao grupo
-
-Ao terminar, informe:
-
-- que o modelo foi criado;
-- quais classes foram usadas;
+- modelo criado;
 - quantidade de imagens por classe;
-- se o treinamento terminou corretamente;
-- onde estão os prints.
+- prints;
+- observações do primeiro treinamento.
 
 ---
 
-# Kauê Cavalcanti Araujo — como começar
+# 3. Kauê Cavalcanti Araujo — experimentos
 
-## Sua responsabilidade
+## Responsabilidade
 
-Testar diferentes configurações do modelo e comparar os resultados.
-
-## O que você precisa receber antes
-
-Paulo deve ter criado o projeto no Teachable Machine e confirmado que o treinamento básico funciona.
-
-## Conceitos que você precisa entender
-
-### Epochs
-
-Indica quantas vezes o modelo passa pelos dados de treinamento.
-
-Mais épocas podem melhorar o aprendizado, mas também podem fazer o modelo memorizar demais os dados.
-
-### Batch Size
-
-Indica quantas imagens são processadas por vez durante o treinamento.
-
-### Learning Rate
-
-Controla o tamanho dos ajustes feitos pelo modelo durante o aprendizado.
+Testar configurações avançadas e comparar resultados.
 
 ## Experimentos sugeridos
 
-### Experimento 1
+| Experimento | Epochs | Batch Size | Learning Rate |
+|---|---:|---:|---:|
+| 1 | 50 | 16 | 0.001 |
+| 2 | 100 | 16 | 0.001 |
+| 3 | 100 | 32 | 0.001 |
 
-```text
-Epochs: 50
-Batch Size: 16
-Learning Rate: 0.001
-```
+## Como fazer
 
-### Experimento 2
+Para cada experimento:
 
-```text
-Epochs: 100
-Batch Size: 16
-Learning Rate: 0.001
-```
+1. configurar os parâmetros;
+2. tirar print da configuração;
+3. treinar o modelo;
+4. registrar o resultado observado;
+5. tirar print do resultado;
+6. anotar diferenças entre os treinamentos.
 
-### Experimento 3
+No final, indicar qual configuração pareceu melhor e justificar com os resultados reais.
 
-```text
-Epochs: 100
-Batch Size: 32
-Learning Rate: 0.001
-```
+## Entrega
 
-## O que fazer em cada experimento
-
-1. Alterar os parâmetros.
-2. Treinar o modelo.
-3. Anotar a configuração usada.
-4. Observar o comportamento do modelo.
-5. Registrar o resultado em `resultados/testes.md`.
-6. Tirar print das configurações.
-7. Tirar print do resultado.
-
-## O que comparar
-
-Tente responder:
-
-- Qual configuração pareceu mais estável?
-- Alguma configuração piorou o desempenho?
-- Houve diferença de confiança entre os testes?
-- Alguma classe continuou sendo confundida?
-
-## O que você deve entregar ao grupo
-
-Uma tabela com:
-
-- configuração de cada experimento;
-- resultado observado;
-- qual configuração pareceu melhor;
-- prints de cada treinamento.
-
-Não invente valores. Use apenas resultados observados de verdade.
+- tabela dos três experimentos;
+- prints das configurações;
+- resultados observados;
+- indicação da configuração final.
 
 ---
 
-# Caio Barros Queiroz — como começar
+# 4. Caio Barros Queiroz — análise em Python e integração
 
-## Sua responsabilidade
+## Responsabilidade
 
-Desenvolver a parte em Python, organizar os resultados, calcular a acurácia e integrar as entregas do grupo.
+Registrar os testes reais do modelo, calcular acurácia, exportar os resultados e integrar o material final.
 
-## O que você precisa receber antes
-
-Você depende dos resultados dos testes do modelo.
-
-Não faz sentido calcular acurácia sem testes reais.
-
-## Primeiro arquivo a abrir
+O código já está organizado em módulos:
 
 ```text
-codigo/analise_resultados.py
+codigo/
+  analise_resultados.py
+  sistema.py
+  cadastro.py
+  analise.py
+  exportacao.py
 ```
 
-O arquivo possui partes marcadas com `TODO`.
+Para executar:
 
-Essas partes devem ser implementadas aos poucos.
+```powershell
+python codigo\analise_resultados.py
+```
 
-## Ordem recomendada
+## Dados que devem ser registrados
 
-### 1. Implementar `registrar_teste()`
-
-O programa deve receber:
+Para cada imagem de teste:
 
 - nome da imagem;
 - classe real;
 - classe prevista;
 - confiança;
-- se houve acerto ou erro.
+- acerto ou erro.
 
-Primeiro teste manual sugerido:
+Depois usar o programa para:
 
-```text
-Imagem: garfo01.jpg
-Classe real: Garfo
-Classe prevista: Garfo
-Confiança: 95
-```
+- visualizar resultados;
+- calcular acurácia geral;
+- calcular desempenho por classe;
+- verificar quantidade de testes por classe;
+- exportar `resultados/testes.csv`.
 
-### 2. Implementar `visualizar_resultados()`
+## Entrega
 
-Depois de cadastrar testes, o programa deve mostrar todos os registros.
-
-### 3. Implementar `calcular_acuracia()`
-
-Fórmula:
-
-```text
-Acurácia = (acertos / total de testes) × 100
-```
-
-### 4. Implementar `exportar_csv()`
-
-O resultado final deve ser salvo em:
-
-```text
-resultados/testes.csv
-```
-
-## O que você deve conferir
-
-- nenhum resultado foi inventado;
-- os testes registrados correspondem aos testes reais do Teachable Machine;
-- acertos e erros estão corretos;
-- a acurácia foi calculada corretamente;
-- o CSV foi gerado;
-- os prints foram organizados.
-
-## O que você deve entregar ao grupo
-
-- programa funcionando;
-- acurácia final;
-- total de testes;
-- total de acertos;
-- total de erros;
 - CSV final;
-- resumo dos principais erros do modelo.
+- acurácia geral;
+- desempenho por classe;
+- total de acertos e erros;
+- prints do programa;
+- resumo dos erros relevantes.
 
 ---
 
-# Como todos devem trabalhar juntos no final
+# 5. Testes finais — grupo
 
-Depois que as quatro responsabilidades principais forem concluídas, o grupo deve fazer uma revisão conjunta.
+Depois de escolher o melhor treinamento, testar apenas imagens que não foram usadas no treino.
 
-Todos devem conseguir responder:
+Sugestão:
 
-1. O que foi treinado?
-2. Quantas imagens foram usadas?
-3. Como treino e teste foram separados?
-4. Quais parâmetros foram testados?
-5. Qual configuração foi escolhida?
-6. Quantos testes foram feitos?
-7. Qual foi a acurácia?
-8. Em quais situações o modelo errou?
-9. Por que esses erros podem ter acontecido?
-10. Como o modelo poderia ser melhorado?
-
----
-
-# Para quem nunca usou Git
-
-Antes de começar a trabalhar localmente:
-
-```powershell
-git clone https://github.com/Caiobqz/teachable-machine-utensilios-cozinha.git
-cd teachable-machine-utensilios-cozinha
+```text
+Garfo: 10 testes
+Panela: 10 testes
+Colher: 10 testes
+Total: 30 testes
 ```
 
-Se o projeto já estiver na máquina:
+Para cada teste registrar previsão e confiança. Guardar também erros do modelo, pois eles serão usados na análise crítica.
+
+---
+
+# 6. Informações técnicas já confirmadas no modelo exportado
+
+O arquivo exportado pelo Teachable Machine confirmou:
+
+```text
+Classes: Colher, Garfo e Panela
+Quantidade de classes: 3
+Entrada: 224 × 224 pixels
+Canais: RGB (3 canais)
+Teachable Machine: 2.4.16
+Formato exportado: TensorFlow.js
+```
+
+Essas informações podem ser usadas na metodologia do relatório.
+
+---
+
+# 7. Relatório final
+
+O PDF deve incluir:
+
+1. Capa
+2. Integrantes
+3. Introdução
+4. Objetivos
+5. Metodologia
+6. Coleta de dados
+7. Separação treino/teste
+8. Classes utilizadas
+9. Treinamento
+10. Experimentos com Epochs, Batch Size e Learning Rate
+11. Testes com imagens inéditas
+12. Resultados
+13. Acurácia geral e por classe
+14. Análise dos erros
+15. Justificativa técnica
+16. Análise crítica
+17. Sugestões de melhoria
+18. Conclusão
+
+---
+
+# 8. Git
+
+Antes de trabalhar:
 
 ```powershell
 git pull origin main
 ```
 
-Antes de enviar alterações:
+Para enviar alterações:
 
 ```powershell
 git status
-```
-
-Depois:
-
-```powershell
 git add .
 git commit -m "Descrição do que foi feito"
 git push origin main
 ```
 
-Exemplos de commits melhores:
-
-```text
-Organiza imagens de treino e teste
-Adiciona prints do treinamento inicial
-Registra experimentos de hiperparâmetros
-Implementa cálculo de acurácia
-```
-
-Evite commits vagos como:
-
-```text
-update
-coisa nova
-mudança
-```
-
 ---
 
-# Regra de passagem entre integrantes
+# 9. Regra de passagem entre integrantes
 
-Antes de dizer que sua etapa terminou, confirme:
+Antes de considerar uma etapa concluída:
 
 ```text
-[ ] Minha tarefa foi concluída
-[ ] Os arquivos estão organizados
-[ ] Os resultados estão registrados
-[ ] Os prints necessários foram salvos
-[ ] Não inventei nenhum dado
-[ ] A próxima pessoa sabe o que precisa receber
-[ ] Expliquei ao grupo o que fiz
+[ ] tarefa concluída
+[ ] arquivos organizados
+[ ] resultados registrados
+[ ] prints salvos
+[ ] nenhum dado inventado
+[ ] próxima pessoa recebeu o necessário
 ```
-
-Se uma dessas respostas for "não", a etapa ainda não está realmente pronta para ser passada adiante.
