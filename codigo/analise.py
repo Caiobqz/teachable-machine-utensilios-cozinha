@@ -67,7 +67,7 @@ def resumo_quantidade_por_classe(resultados):
     contagem = {
         "Garfo": 0,
         "Panela": 0,
-        "Espátula": 0,
+        "Colher": 0,
     }
 
     for resultado in resultados:
