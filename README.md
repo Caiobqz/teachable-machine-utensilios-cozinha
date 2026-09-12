@@ -13,11 +13,11 @@ Projeto acadêmico para criação e avaliação de um modelo de classificação 
 
 Treinar um modelo capaz de identificar diferentes utensílios de cozinha a partir de fotografias e avaliar seu desempenho com imagens não utilizadas no treinamento.
 
-## Classes sugeridas
+## Classes utilizadas
 
 - Garfo
 - Panela
-- Espátula
+- Colher
 
 ## Estrutura prevista
 
@@ -26,18 +26,24 @@ imagens/
   treino/
     garfo/
     panela/
-    espatula/
+    colher/
   teste/
     garfo/
     panela/
-    espatula/
+    colher/
 codigo/
   analise_resultados.py
+  sistema.py
+  cadastro.py
+  analise.py
+  exportacao.py
 resultados/
   testes.md
   testes.csv
+  resumo_final.md
 prints/
 relatorio/
+docs/
 ```
 
 # Divisão detalhada do trabalho
@@ -52,49 +58,55 @@ Transformar os resultados obtidos no Teachable Machine em dados organizados, ver
 
 ### O que deve fazer
 
-1. Trabalhar no arquivo `codigo/analise_resultados.py`.
-2. Implementar a função `registrar_teste()` para receber:
+1. Manter e testar os arquivos da pasta `codigo/`.
+2. Receber os resultados reais dos testes realizados no Teachable Machine.
+3. Registrar no programa:
    - nome da imagem testada;
    - classe correta;
    - classe prevista pelo modelo;
-   - confiança em porcentagem;
-   - informação de acerto ou erro.
-3. Implementar `visualizar_resultados()` para mostrar os testes registrados.
-4. Implementar `calcular_acuracia()` usando a fórmula:
+   - confiança em porcentagem.
+4. Visualizar os resultados registrados.
+5. Calcular a acurácia geral usando:
 
 ```text
 Acurácia = (acertos / total de testes) × 100
 ```
 
-5. Implementar `exportar_csv()` para gerar `resultados/testes.csv`.
-6. Receber do responsável pelos testes os resultados reais do Teachable Machine.
-7. Conferir se os dados passados para o programa estão corretos.
-8. Registrar também os erros do modelo, sem excluir resultados ruins.
-9. Executar o código e tirar prints do programa funcionando.
-10. Organizar os arquivos do repositório e garantir que a estrutura esteja clara.
+6. Calcular o desempenho separado por Garfo, Panela e Colher.
+7. Conferir se a quantidade de testes está equilibrada entre as classes.
+8. Exportar os resultados para `resultados/testes.csv`.
+9. Registrar também os erros do modelo, sem excluir resultados ruins.
+10. Executar o código e tirar prints do programa funcionando.
 11. Juntar os materiais enviados pelos outros integrantes na versão final do projeto.
 12. Ajudar na montagem da seção de resultados do relatório.
 13. Conferir se a acurácia apresentada no relatório corresponde aos testes registrados.
 14. Fazer uma revisão técnica final antes da entrega.
 
+### Estrutura do código
+
+O código foi dividido em módulos para facilitar a leitura e permitir alterações mínimas:
+
+- `codigo/analise_resultados.py`: ponto de entrada do programa;
+- `codigo/sistema.py`: menu principal;
+- `codigo/cadastro.py`: cadastro e visualização dos testes;
+- `codigo/analise.py`: acurácia, desempenho por classe e contagem dos testes;
+- `codigo/exportacao.py`: exportação do CSV.
+
 ### O que deve entregar ao grupo
 
-- `codigo/analise_resultados.py` funcional;
-- `resultados/testes.csv`;
+- código Python funcional;
+- `resultados/testes.csv` com os resultados reais;
 - resultado da acurácia final;
+- desempenho por classe;
 - prints do programa em execução;
 - texto curto explicando como o cálculo da acurácia foi realizado;
 - confirmação de que os dados do relatório batem com os testes reais.
 
-### Quando pode começar
-
-Pode desenvolver o código desde o início, mas a parte final depende de os testes do modelo estarem concluídos.
-
 ### Cuidados
 
-- Não inventar resultados para preencher o código.
+- Não inventar resultados.
 - Não modificar manualmente a acurácia para parecer melhor.
-- Conferir nomes das classes para evitar erro por diferença entre `Garfo` e `garfo`.
+- Usar sempre as classes `Garfo`, `Panela` e `Colher`.
 - Guardar os resultados antes de montar o relatório final.
 
 ---
@@ -110,7 +122,7 @@ Montar um conjunto de imagens com qualidade suficiente para que o modelo consiga
 1. Organizar imagens de:
    - Garfo;
    - Panela;
-   - Espátula.
+   - Colher.
 2. Tentar obter aproximadamente 40 imagens de cada classe.
 3. Separar aproximadamente:
    - 30 imagens por classe para treinamento;
@@ -122,19 +134,18 @@ Montar um conjunto de imagens com qualidade suficiente para que o modelo consiga
    - foco adequado;
    - enquadramento claro.
 6. Evitar fotos com muitos objetos extras que possam confundir o modelo.
-7. Variar as imagens para evitar que o modelo apenas memorize um padrão.
-8. Variar:
+7. Variar:
    - ângulo;
    - distância;
    - posição;
    - fundo;
    - iluminação;
    - orientação do utensílio.
-9. Remover imagens repetidas ou quase idênticas.
-10. Organizar corretamente as pastas de treino e teste.
-11. Contar quantas imagens existem em cada classe.
-12. Registrar essa quantidade para ser usada na metodologia do relatório.
-13. Tirar pelo menos um print mostrando como as imagens foram organizadas.
+8. Remover imagens repetidas ou quase idênticas.
+9. Organizar corretamente as pastas de treino e teste.
+10. Contar quantas imagens existem em cada classe.
+11. Registrar essa quantidade para ser usada na metodologia do relatório.
+12. Tirar pelo menos um print mostrando como as imagens foram organizadas.
 
 ### O que deve entregar ao grupo
 
@@ -145,16 +156,12 @@ Montar um conjunto de imagens com qualidade suficiente para que o modelo consiga
 - prints da organização do conjunto de dados;
 - pequeno texto explicando os critérios usados para escolher as imagens.
 
-### Quando deve concluir
-
-Antes de Paulo iniciar o treinamento principal. Sem um conjunto de dados organizado, o restante do projeto fica comprometido.
-
 ### Cuidados
 
 - Não usar a mesma foto em treino e teste.
 - Não deixar uma classe com muito mais imagens que as outras.
 - Não escolher apenas imagens com o mesmo fundo.
-- Não usar fotos ruins só para aumentar a quantidade.
+- Não usar fotos ruins apenas para aumentar a quantidade.
 
 ---
 
@@ -172,7 +179,7 @@ Configurar corretamente o projeto no Teachable Machine e realizar o treinamento 
 4. Criar exatamente três classes:
    - Garfo;
    - Panela;
-   - Espátula.
+   - Colher.
 5. Receber de Suellen somente as imagens destinadas ao treinamento.
 6. Carregar cada imagem na classe correta.
 7. Conferir se nenhuma imagem foi adicionada na classe errada.
@@ -185,10 +192,7 @@ Configurar corretamente o projeto no Teachable Machine e realizar o treinamento 
     - tela antes do treinamento;
     - treinamento concluído;
     - previsão de uma imagem de exemplo.
-12. Registrar qualquer problema encontrado, como:
-    - classe com desempenho muito pior;
-    - confusão frequente entre objetos;
-    - resultado aparentemente incoerente.
+12. Registrar qualquer problema encontrado, como classe com desempenho pior ou confusão frequente entre objetos.
 13. Passar o projeto treinado e os resultados iniciais para Kauê continuar os experimentos.
 14. Escrever um pequeno resumo explicando como o modelo foi criado.
 
@@ -200,10 +204,6 @@ Configurar corretamente o projeto no Teachable Machine e realizar o treinamento 
 - prints do processo;
 - texto curto explicando a criação e o treinamento inicial;
 - observações sobre dificuldades ou comportamentos estranhos do modelo.
-
-### Quando deve começar
-
-Depois de Suellen concluir a organização das imagens de treinamento.
 
 ### Cuidados
 
@@ -218,7 +218,7 @@ Depois de Suellen concluir a organização das imagens de treinamento.
 
 ### Responsabilidade principal
 
-Testar diferentes configurações do modelo e descobrir como os parâmetros influenciam o comportamento da classificação.
+Testar diferentes configurações do modelo e observar como os parâmetros influenciam a classificação.
 
 ### O que deve fazer
 
@@ -253,7 +253,7 @@ Learning Rate: 0.001
 
 5. Treinar o modelo separadamente em cada configuração.
 6. Registrar cada experimento em `resultados/testes.md`.
-7. Anotar para cada experimento:
+7. Anotar:
    - Epochs;
    - Batch Size;
    - Learning Rate;
@@ -264,9 +264,8 @@ Learning Rate: 0.001
 10. Comparar os experimentos e identificar qual configuração pareceu mais consistente.
 11. Não escolher automaticamente o treinamento com mais épocas como o melhor.
 12. Explicar por que uma configuração foi considerada melhor ou pior.
-13. Separar os prints de forma organizada para o relatório.
-14. Passar para Caio os resultados da configuração escolhida para os testes finais.
-15. Escrever um resumo comparativo dos três experimentos.
+13. Passar para Caio os resultados da configuração escolhida para os testes finais.
+14. Escrever um resumo comparativo dos três experimentos.
 
 ### O que deve entregar ao grupo
 
@@ -277,24 +276,20 @@ Learning Rate: 0.001
 - indicação da configuração escolhida para os testes finais;
 - texto explicando as diferenças observadas.
 
-### Quando deve começar
-
-Depois de Paulo concluir o primeiro treinamento e confirmar que o projeto está funcionando corretamente.
-
-### Cuidados
-
-- Alterar os parâmetros de maneira controlada.
-- Registrar os valores antes de iniciar cada treinamento.
-- Não misturar resultados de experimentos diferentes.
-- Não inventar números ou conclusões que não foram observados.
-
 ---
 
-# Tarefas que devem ser feitas em conjunto
-
-## Testes finais do modelo
+# Testes finais do modelo
 
 Depois dos experimentos, o grupo deve testar o modelo escolhido com imagens que não fizeram parte do treinamento.
+
+Sugestão de quantidade:
+
+```text
+Garfo: 10 imagens
+Panela: 10 imagens
+Colher: 10 imagens
+Total: 30 testes
+```
 
 Para cada imagem, registrar:
 
@@ -306,7 +301,7 @@ Para cada imagem, registrar:
 
 É importante testar as três classes e guardar também exemplos de erros.
 
-## Análise crítica
+# Análise crítica
 
 Todos devem ajudar a responder:
 
@@ -321,7 +316,7 @@ Todos devem ajudar a responder:
 9. As classes estavam equilibradas?
 10. Qual seria a principal melhoria para uma próxima versão?
 
-## Relatório final
+# Relatório final
 
 Cada integrante deve escrever ou revisar a parte relacionada à própria tarefa:
 
@@ -330,6 +325,27 @@ Cada integrante deve escrever ou revisar a parte relacionada à própria tarefa:
 - **Kauê:** experimentos, parâmetros e comparação.
 - **Caio:** testes, código Python, acurácia, resultados e integração do relatório.
 - **Todos:** análise crítica, conclusão e revisão final.
+
+## Estrutura recomendada do PDF
+
+1. Capa
+2. Integrantes
+3. Introdução
+4. Objetivos
+5. Metodologia
+6. Coleta e preparação das imagens
+7. Separação entre treino e teste
+8. Criação das classes
+9. Treinamento do modelo
+10. Experimentos com Epochs, Batch Size e Learning Rate
+11. Testes com imagens inéditas
+12. Resultados
+13. Acurácia geral
+14. Desempenho por classe
+15. Análise dos erros
+16. Análise crítica
+17. Sugestões de melhoria
+18. Conclusão
 
 # Ordem recomendada de execução
 
@@ -367,12 +383,18 @@ Cada integrante deve escrever ou revisar a parte relacionada à própria tarefa:
 
 # Regra de trabalho do grupo
 
-Nenhuma etapa deve ser considerada concluída apenas porque “funcionou”. O responsável deve deixar uma evidência que o próximo integrante consiga usar: arquivo, print, tabela, resultado ou explicação curta. Isso evita retrabalho e facilita a montagem do relatório final.
+Nenhuma etapa deve ser considerada concluída apenas porque funcionou. O responsável deve deixar uma evidência que o próximo integrante consiga usar: arquivo, print, tabela, resultado ou explicação curta. Isso evita retrabalho e facilita a montagem do relatório final.
 
-## Código-base
+## Como executar o código
 
-O arquivo `codigo/analise_resultados.py` foi deixado propositalmente incompleto em algumas partes marcadas com `TODO`. Essas partes devem ser desenvolvidas durante a atividade para praticar listas, dicionários, funções, estruturas condicionais, repetição e cálculo de acurácia.
+Na raiz do repositório:
+
+```powershell
+python codigo\analise_resultados.py
+```
+
+O programa trabalha com as classes `Garfo`, `Panela` e `Colher` e permite registrar os resultados obtidos no Teachable Machine, calcular a acurácia e exportar o CSV.
 
 ## Próxima tarefa
 
-A primeira dependência real do projeto é a preparação das imagens. Portanto, o grupo deve começar confirmando a quantidade de imagens de Garfo, Panela e Espátula que serão usadas em treino e teste.
+A primeira dependência prática do projeto é preparar e separar corretamente as imagens de Garfo, Panela e Colher entre os conjuntos de treinamento e teste.
