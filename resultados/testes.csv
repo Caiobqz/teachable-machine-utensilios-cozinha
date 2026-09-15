@@ -1,3 +1,15 @@
 imagem,classe_real,classe_prevista,confianca,acertou
-teste1,Garfo,garfo,87.0,True
-Teste2,Garfo,Panela,50.0,False
+colher_01,Colher,Colher,100.0,True
+colher_02,Colher,Colher,100.0,True
+colher_03,Colher,Colher,100.0,True
+colher_04,Colher,Colher,100.0,True
+colher_05,Colher,Colher,100.0,True
+panela_01,Panela,Panela,53.0,True
+panela_02,Panela,Panela,100.0,True
+panela_03,Panela,Panela,96.0,True
+panela_04,Panela,Panela,71.0,True
+panela_05,Panela,Panela,100.0,True
+garfo_01,Garfo,Garfo,91.0,True
+garfo_02,Garfo,Garfo,94.0,True
+garfo_03,Garfo,Garfo,98.0,True
+garfo_04,Garfo,Colher,54.0,False
