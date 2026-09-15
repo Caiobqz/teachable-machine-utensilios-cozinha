@@ -1,7 +1,5 @@
 # Relatório — Classificação de Utensílios de Cozinha com Teachable Machine
 
-> Este arquivo reúne a estrutura do relatório final. Os campos marcados como **PREENCHER** ainda dependem da consolidação completa dos testes.
-
 ## Capa
 
 **Instituição:** FIAP  
@@ -49,7 +47,7 @@ O projeto foi dividido em coleta de dados, treinamento, experimentação e avali
 
 As imagens foram selecionadas buscando boa iluminação, foco adequado e presença clara do utensílio principal. Também foram consideradas variações de ângulo, distância, posição, fundo e aparência dos objetos para reduzir a dependência de padrões específicos do cenário.
 
-As imagens utilizadas para avaliação devem permanecer separadas das imagens de treinamento.
+Para que a avaliação represente a capacidade de generalização do modelo, as imagens de teste devem ser diferentes das imagens utilizadas durante o treinamento.
 
 ## 4. Configuração técnica do modelo
 
@@ -66,6 +64,14 @@ O modelo exportado confirmou:
 | Formato exportado | TensorFlow.js |
 | Teachable Machine | 2.4.16 |
 
+Na interface usada nos testes, o mapeamento observado foi:
+
+```text
+Class 1 = Panela
+Class 2 = Garfo
+Class 3 = Colher
+```
+
 ## 5. Experimentos de treinamento
 
 As seguintes configurações foram confirmadas por prints do modelo principal:
@@ -75,78 +81,104 @@ As seguintes configurações foram confirmadas por prints do modelo principal:
 | A | 50 | 16 | 0.001 | Confirmada por múltiplos testes |
 | B | 70 | 32 | 0.001 | Confirmada por teste |
 
-A comparação deve considerar não apenas se a classificação foi correta, mas também a confiança apresentada pelo modelo e a estabilidade diante de imagens diferentes.
+A comparação considera não apenas se a classificação foi correta, mas também a confiança apresentada e a estabilidade do modelo diante de imagens diferentes.
 
-## 6. Testes documentados
+## 6. Testes com imagens novas
 
-Entre as evidências registradas no modelo principal, foram observados:
+Nos envios mais recentes foram recebidos 15 prints. Um deles, referente a um Garfo classificado com 91%, era repetido. Para preservar a validade da avaliação, ele foi contabilizado apenas uma vez.
 
-| Situação | Classe esperada | Previsão | Confiança | Resultado |
-|---|---|---|---:|---|
-| Garfo isolado | Garfo | Garfo | 100% | Acerto |
-| Conjunto de panelas | Panela | Panela | 100% | Acerto |
-| Cena com panelas visualmente dominantes | Panela | Panela | 98% | Acerto aparente |
-| Garfos na Configuração B | Garfo | Garfo | 72% | Acerto |
+Assim, foram considerados **14 testes únicos**:
 
-Os prints correspondentes devem ser inseridos no PDF final como evidência do comportamento do modelo.
+| Classe | Testes únicos | Acertos | Erros | Taxa de acerto |
+|---|---:|---:|---:|---:|
+| Garfo | 4 | 3 | 1 | 75% |
+| Panela | 5 | 5 | 0 | 100% |
+| Colher | 5 | 5 | 0 | 100% |
+| **Total** | **14** | **13** | **1** | **92,86%** |
+
+Principais exemplos registrados:
+
+- Colher classificada corretamente com 100% de confiança em cinco testes únicos;
+- Panela classificada corretamente com confianças de 53%, 71%, 96% e 100% nos exemplos documentados;
+- Garfo classificado corretamente com 91%, 94% e 98%;
+- um Garfo classificado incorretamente como Colher com 54%, enquanto Garfo recebeu 46%.
 
 ## 7. Resultados finais
 
 ### 7.1 Resultado geral
 
 ```text
-Total de testes: PREENCHER
-Acertos: PREENCHER
-Erros: PREENCHER
-Acurácia: PREENCHER %
+Total de testes únicos: 14
+Acertos: 13
+Erros: 1
+Acurácia observada: 92,86%
 ```
 
-A acurácia será calculada pela fórmula:
+A acurácia foi calculada pela fórmula:
 
 ```text
 Acurácia = (acertos / total de testes) × 100
+Acurácia = (13 / 14) × 100
+Acurácia = 92,86%
 ```
+
+**Observação:** este resultado deve ser apresentado como acurácia final do experimento apenas se o grupo confirmar que essas imagens não faziam parte das 160 imagens utilizadas no treinamento de cada classe.
 
 ### 7.2 Desempenho por classe
 
 | Classe | Testes | Acertos | Erros | Acurácia |
 |---|---:|---:|---:|---:|
-| Garfo | PREENCHER | PREENCHER | PREENCHER | PREENCHER |
-| Panela | PREENCHER | PREENCHER | PREENCHER | PREENCHER |
-| Colher | PREENCHER | PREENCHER | PREENCHER | PREENCHER |
+| Garfo | 4 | 3 | 1 | 75% |
+| Panela | 5 | 5 | 0 | 100% |
+| Colher | 5 | 5 | 0 | 100% |
 
-## 8. Justificativa técnica
+## 8. Justificativa técnica dos resultados
 
-Os testes já documentados indicam que a classe Panela apresentou comportamento consistente e previsões com confiança elevada. Garfo e Colher possuem maior semelhança visual, pois são objetos alongados e podem aparecer em posições e fundos semelhantes, o que pode reduzir a confiança do modelo.
+O modelo apresentou comportamento consistente para Panela e Colher, com 100% de acerto nos testes únicos registrados dessas duas classes. Entretanto, a confiança das previsões variou. Uma Panela foi classificada corretamente com apenas 53%, enquanto a classe Colher recebeu 47%. Em outro teste de Panela, a confiança foi de 71% contra 29% para Colher. Isso demonstra que uma classificação correta não significa necessariamente alta certeza.
 
-Também foi observado que cenas com vários utensílios podem fazer o classificador priorizar a classe visualmente dominante, já que o modelo realiza classificação da imagem inteira e não detecção individual de cada objeto presente.
+A maior dificuldade observada envolveu Garfo e Colher. Ambas as classes possuem formato alongado, material semelhante e podem ocupar regiões parecidas da imagem. No único erro do lote recente, um Garfo foi classificado como Colher com 54%, enquanto Garfo ficou com 46%. A proximidade entre as probabilidades indica uma decisão incerta do modelo.
 
-## 9. Análise crítica
+Fundos, iluminação, posição e orientação dos utensílios também podem modificar os padrões visuais percebidos pelo classificador. Dessa forma, a diversidade das imagens é um fator importante tanto no treinamento quanto na avaliação.
 
-A análise final deve considerar:
+## 9. Análise do erro principal
 
-- qual classe apresentou maior estabilidade;
-- quais classes apresentaram maior semelhança visual;
-- influência de fundo, iluminação, distância e ângulo;
-- diferenças de confiança entre as configurações testadas;
-- desempenho em imagens inéditas;
-- limitações do conjunto de dados.
+```text
+Classe real: Garfo
+Classe prevista: Colher
+Confiança da previsão: 54%
+Probabilidade de Garfo: 46%
+Resultado: Erro
+```
 
-## 10. Sugestões de melhoria
+Esse teste é importante porque evidencia uma limitação real do modelo. A diferença de apenas 8 pontos percentuais entre Colher e Garfo indica que o classificador encontrou características compatíveis com ambas as classes. A semelhança visual entre os utensílios e as condições da imagem podem ter contribuído para o resultado.
 
-- ampliar o conjunto de imagens de teste;
-- aumentar a diversidade de Garfo e Colher;
-- incluir diferentes condições de iluminação;
-- variar ainda mais fundo, distância e ângulo;
-- testar objetos parcialmente ocultos;
-- evitar cenas com várias classes no cálculo da acurácia de objeto único;
-- registrar todos os testes no CSV para tornar a avaliação reproduzível.
+## 10. Análise crítica
 
-## 11. Conclusão
+Os resultados mostram que o modelo conseguiu classificar corretamente a maior parte das imagens testadas, alcançando 92,86% de acurácia no conjunto de 14 testes únicos. Panela e Colher tiveram os melhores resultados, sem erros no lote analisado.
 
-O projeto demonstrou que o Google Teachable Machine pode ser utilizado para construir um classificador de imagens de maneira acessível. O modelo principal foi treinado de forma balanceada com 160 imagens por classe e apresentou resultados especialmente consistentes para Panela. Os testes também mostraram que a confiança pode variar conforme a semelhança visual entre as classes e a configuração de treinamento.
+Garfo apresentou maior dificuldade. Embora três imagens tenham sido corretamente reconhecidas com confiança alta, uma imagem foi confundida com Colher. Esse resultado é coerente com a proximidade visual entre essas duas categorias e mostra que o modelo ainda pode ser melhorado com mais exemplos variados.
 
-A conclusão final deverá ser complementada com a acurácia consolidada calculada a partir do conjunto completo de testes inéditos.
+Outro ponto relevante é a variação de confiança. Alguns exemplos foram classificados com 100%, enquanto outros acertos ocorreram com 53% ou 71%. Portanto, além da taxa de acerto, a distribuição das probabilidades também foi considerada na interpretação do desempenho.
+
+Como o conjunto de teste ainda é relativamente pequeno, a acurácia deve ser entendida como o desempenho observado nas imagens avaliadas, e não como garantia de que o modelo manterá o mesmo resultado em qualquer cenário.
+
+## 11. Sugestões de melhoria
+
+- aumentar a quantidade e diversidade de imagens de Garfo;
+- incluir mais imagens de Garfo e Colher em condições visuais semelhantes;
+- variar iluminação, fundo, distância e orientação;
+- incluir objetos parcialmente ocultos;
+- ampliar o conjunto de testes em uma versão futura;
+- alterar um hiperparâmetro por vez durante novos experimentos;
+- manter rigorosamente separados os conjuntos de treinamento e avaliação.
+
+## 12. Conclusão
+
+O projeto atingiu o objetivo de desenvolver um modelo de classificação de utensílios de cozinha utilizando o Google Teachable Machine. O modelo principal foi treinado de maneira equilibrada, com 160 imagens por classe, totalizando 480 amostras de treinamento.
+
+No conjunto recente de 14 testes únicos, o modelo obteve 13 acertos e 1 erro, resultando em uma acurácia observada de **92,86%**. Panela e Colher alcançaram 100% de acerto nas imagens avaliadas, enquanto Garfo apresentou um caso de confusão com Colher.
+
+A análise mostrou que o modelo é funcional, mas também revelou limitações importantes. A semelhança entre Garfo e Colher e a variação de confiança em algumas imagens indicam que mais diversidade de dados poderia aumentar a robustez do classificador. Dessa forma, além de demonstrar o funcionamento da ferramenta, o projeto permitiu observar na prática como qualidade dos dados, variedade visual e configuração de treinamento influenciam o desempenho de um sistema de visão computacional.
 
 ---
 
@@ -159,8 +191,11 @@ A conclusão final deverá ser complementada com a acurácia consolidada calcula
 [x] código Python modularizado
 [x] RMs dos integrantes registrados
 [x] evidências e prints organizados
-[ ] acurácia final consolidada
-[ ] print final do programa Python
-[ ] PDF final revisado
-[ ] nome do arquivo conforme padrão da faculdade
+[x] acurácia observada calculada com os testes únicos
+[x] análise crítica atualizada
+[x] conclusão atualizada
+[ ] confirmar que as imagens dos testes recentes eram inéditas
+[ ] gerar print final do programa Python com os mesmos dados
+[ ] revisar e gerar o PDF definitivo
+[ ] nomear o arquivo conforme o padrão da faculdade
 ```
