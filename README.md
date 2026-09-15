@@ -2,6 +2,9 @@
 
 Projeto acadêmico de **Inteligência Artificial e Visão Computacional** desenvolvido com o Google Teachable Machine para classificar imagens de utensílios de cozinha.
 
+> **Fase 1 — Raízes da Inteligência: preparando o terreno**  
+> **Capítulo 2 — IA e seu mundo de possibilidades**
+
 > O modelo trabalha com três classes: **Garfo**, **Panela** e **Colher**.
 
 ---
@@ -62,11 +65,17 @@ Formato exportado: TensorFlow.js
 Teachable Machine: 2.4.16
 ```
 
+Mapeamento observado na interface do Teachable Machine:
+
+```text
+Class 1 = Panela
+Class 2 = Garfo
+Class 3 = Colher
+```
+
 ---
 
 ## ⚙️ Configurações documentadas
-
-Foram registradas configurações diferentes durante os testes do modelo principal.
 
 | Configuração | Epochs | Batch Size | Learning Rate |
 |---|---:|---:|---:|
@@ -77,22 +86,51 @@ Os resultados e observações estão organizados em `resultados/testes.md` e `re
 
 ---
 
+## ✅ Resultado final da avaliação
+
+O grupo confirmou que as imagens utilizadas na avaliação final eram **inéditas**, ou seja, não faziam parte das 160 imagens de treinamento de cada classe.
+
+Foram considerados **14 testes únicos**. Um print repetido foi removido da contagem para evitar duplicidade.
+
+| Classe | Testes | Acertos | Erros | Acurácia |
+|---|---:|---:|---:|---:|
+| Garfo | 4 | 3 | 1 | 75% |
+| Panela | 5 | 5 | 0 | 100% |
+| Colher | 5 | 5 | 0 | 100% |
+| **Total** | **14** | **13** | **1** | **92,86%** |
+
+### Precisão por classe
+
+Considerando a precisão formal `TP / (TP + FP)` no conjunto testado:
+
+| Classe prevista | Precisão |
+|---|---:|
+| Garfo | 100% |
+| Panela | 100% |
+| Colher | 83,33% |
+| **Média macro** | **94,44%** |
+
+O único erro final ocorreu em uma imagem de **Garfo**, classificada como **Colher** com 54% de confiança, enquanto Garfo recebeu 46%.
+
+---
+
 ## 🗂️ Estrutura do projeto
 
 ```text
 teachable-machine-utensilios-cozinha/
 │
 ├── codigo/
-│   ├── analise_resultados.py   # ponto de entrada
-│   ├── sistema.py              # menu principal
-│   ├── cadastro.py             # registro dos testes
-│   ├── analise.py              # acurácia e desempenho por classe
-│   └── exportacao.py           # geração do CSV
+│   ├── analise_resultados.py
+│   ├── sistema.py
+│   ├── cadastro.py
+│   ├── analise.py
+│   └── exportacao.py
 │
 ├── docs/
 │   ├── como-comecar.md
 │   ├── metodologia.md
-│   └── modelo-tecnico.md
+│   ├── modelo-tecnico.md
+│   └── finalizacao-entrega.md
 │
 ├── resultados/
 │   ├── testes.md
@@ -102,16 +140,6 @@ teachable-machine-utensilios-cozinha/
 ├── relatorio/
 │   └── relatorio_base.md
 │
-├── imagens/
-│   ├── treino/
-│   │   ├── garfo/
-│   │   ├── panela/
-│   │   └── colher/
-│   └── teste/
-│       ├── garfo/
-│       ├── panela/
-│       └── colher/
-│
 └── README.md
 ```
 
@@ -119,43 +147,17 @@ teachable-machine-utensilios-cozinha/
 
 ## 💻 Código de análise
 
-A parte em Python foi separada em módulos para deixar o projeto mais legível e facilitar alterações pontuais.
-
-| Arquivo | Função |
-|---|---|
-| `analise_resultados.py` | inicia o programa |
-| `sistema.py` | controla o menu |
-| `cadastro.py` | registra e exibe os testes |
-| `analise.py` | calcula acurácia e desempenho por classe |
-| `exportacao.py` | exporta os resultados para CSV |
-
 Para executar, na raiz do projeto:
 
 ```powershell
 python codigo\analise_resultados.py
 ```
 
-O programa permite registrar:
-
-```text
-Nome da imagem
-Classe real
-Classe prevista
-Confiança do modelo
-Acerto ou erro
-```
-
-Depois calcula:
-
-```text
-Acurácia = (acertos / total de testes) x 100
-```
+O programa permite registrar os testes, visualizar os resultados, calcular acurácia, analisar o desempenho por classe e exportar os dados para CSV.
 
 ---
 
 ## 🔬 Metodologia
-
-O fluxo adotado no projeto foi:
 
 ```text
 Coleta e organização das imagens
@@ -166,58 +168,41 @@ Criação das classes no Teachable Machine
             ↓
 Treinamento do modelo
             ↓
-Testes com diferentes hiperparâmetros
+Testes com diferentes configurações
             ↓
 Avaliação com imagens inéditas
             ↓
-Registro dos resultados em Python
+Registro dos resultados
             ↓
 Análise crítica e relatório final
 ```
 
-Durante a coleta, foram priorizadas imagens com:
-
-- boa iluminação;
-- foco adequado;
-- diferentes fundos;
-- diferentes ângulos;
-- diferentes posições e distâncias;
-- poucos elementos extras quando possível.
+As imagens foram selecionadas buscando boa iluminação, foco adequado e diversidade de fundo, posição, ângulo e distância.
 
 ---
 
-## 📈 Evidências observadas
+## 📈 Principais observações
 
-Os testes documentados mostram comportamento consistente para a classe **Panela**, com exemplos classificados entre **98% e 100% de confiança**.
-
-Também foram observadas situações em que **Garfo** e **Colher** apresentaram maior proximidade visual, reduzindo a confiança da previsão. Em uma das configurações, uma imagem de garfos foi corretamente classificada como Garfo com **72% de confiança**, enquanto outras classes receberam probabilidades menores.
-
-Esses resultados são importantes para a análise crítica porque mostram que confiança alta em exemplos simples não elimina dificuldades em imagens mais ambíguas.
+- Panela e Colher obtiveram 100% de acerto no conjunto final avaliado.
+- Garfo apresentou maior dificuldade, com um erro de classificação para Colher.
+- Uma Panela foi classificada corretamente com apenas 53% de confiança, mostrando que acerto não significa necessariamente alta certeza.
+- A diferença de 54% para Colher e 46% para Garfo no único erro evidencia a proximidade visual entre essas duas classes.
+- A acurácia final de **92,86%** representa o desempenho nas 14 imagens inéditas testadas.
 
 ---
 
-## 📝 Relatório
+## 📝 Relatório final
 
-O relatório final deve incluir:
-
-- introdução e objetivos;
-- metodologia;
-- quantidade e organização das imagens;
-- características técnicas do modelo;
-- configurações de treinamento;
-- prints das principais etapas;
-- testes com imagens novas;
-- cálculo de acurácia;
-- desempenho por classe;
-- análise de erros;
-- análise crítica;
-- sugestões de melhoria;
-- conclusão.
-
-A base do relatório está disponível em:
+A base atualizada do relatório está disponível em:
 
 ```text
 relatorio/relatorio_base.md
+```
+
+Nome escolhido para o PDF entregue pelo grupo:
+
+```text
+Grupo_Cap2_IA_Fase1.pdf
 ```
 
 ---
@@ -228,14 +213,17 @@ relatorio/relatorio_base.md
 - [x] Modelo principal treinado com 160 imagens por classe
 - [x] Modelo exportado
 - [x] Código Python modularizado
-- [x] Testes e evidências organizados
-- [x] Documentação técnica criada
-- [ ] Inserir acurácia final consolidada no relatório
-- [ ] Inserir dados acadêmicos finais de fase/capítulo/disciplina
-- [ ] Revisar o PDF antes do envio na plataforma
+- [x] Testes inéditos confirmados
+- [x] CSV final atualizado
+- [x] Acurácia final: 92,86%
+- [x] Precisão formal calculada
+- [x] Fase 1 e Capítulo 2 confirmados
+- [x] Análise crítica atualizada
+- [x] Conclusão atualizada
+- [x] Nome do PDF final definido
 
 ---
 
 ## 📌 Observação acadêmica
 
-Os resultados apresentados no relatório devem corresponder aos testes realmente realizados. Erros de classificação também fazem parte da avaliação do modelo e são utilizados na análise crítica, sem alteração manual para melhorar artificialmente o desempenho.
+Os resultados apresentados correspondem aos testes realmente realizados. O print duplicado não foi contado duas vezes, e o único erro foi mantido na avaliação e utilizado na análise crítica.
