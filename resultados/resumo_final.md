@@ -1,6 +1,6 @@
 # Resumo Final dos Resultados
 
-Este documento consolida os dados confirmados até o momento para a entrega do projeto.
+Este documento consolida os dados confirmados para a entrega final do projeto da **Fase 1 — Capítulo 2: IA e seu mundo de possibilidades**.
 
 ## 1. Conjunto principal de treinamento
 
@@ -31,88 +31,100 @@ Class 2 = Garfo
 Class 3 = Colher
 ```
 
-## 3. Configurações realmente documentadas
+## 3. Configurações documentadas
 
-| Configuração | Epochs | Batch Size | Learning Rate | Evidência |
-|---|---:|---:|---:|---|
-| A | 50 | 16 | 0.001 | vários prints do modelo de 160 imagens por classe |
-| B | 70 | 32 | 0.001 | print do modelo de 160 imagens por classe |
+| Configuração | Epochs | Batch Size | Learning Rate |
+|---|---:|---:|---:|
+| A | 50 | 16 | 0.001 |
+| B | 70 | 32 | 0.001 |
 
-## 4. Resultado dos testes recentes
+## 4. Avaliação final com imagens inéditas
 
-Foi identificado um print repetido de Garfo com 91% de confiança. Para evitar duplicidade, ele foi contabilizado apenas uma vez.
+O grupo confirmou que as imagens utilizadas na avaliação final **não estavam entre as imagens de treinamento**.
 
-Considerando apenas os **14 testes únicos** visíveis nos prints recentes:
+Um print repetido de Garfo com 91% foi identificado e contabilizado apenas uma vez. Assim, o conjunto final possui **14 testes únicos e inéditos**.
 
 ```text
 Total de testes únicos: 14
 Acertos: 13
 Erros: 1
-Acurácia observada: 92,86%
+Acurácia final: 92,86%
 ```
 
 Desempenho por classe:
 
-| Classe | Testes | Acertos | Erros | Taxa de acerto |
+| Classe | Testes | Acertos | Erros | Acurácia |
 |---|---:|---:|---:|---:|
 | Garfo | 4 | 3 | 1 | 75% |
 | Panela | 5 | 5 | 0 | 100% |
 | Colher | 5 | 5 | 0 | 100% |
 | **Total** | **14** | **13** | **1** | **92,86%** |
 
-**Observação metodológica:** esses resultados devem ser considerados finais apenas se o grupo confirmar que as imagens usadas nesses testes não estavam entre as 160 imagens de treinamento de cada classe.
+## 5. Precisão formal
 
-## 5. Principais resultados observados
+Precisão calculada como `TP / (TP + FP)`:
 
-- Colher foi corretamente classificada em todos os cinco testes únicos recentes, sempre com 100% de confiança.
-- Panela foi corretamente classificada nos cinco testes recentes, com confianças de 53%, 71%, 96% e 100% nos exemplos documentados.
-- Garfo apresentou três acertos com 91%, 94% e 98% de confiança.
-- Em um teste, um Garfo foi classificado incorretamente como Colher com 54%, enquanto Garfo recebeu 46%.
+| Classe prevista | TP | FP | Precisão |
+|---|---:|---:|---:|
+| Garfo | 3 | 0 | 100% |
+| Panela | 5 | 0 | 100% |
+| Colher | 5 | 1 | 83,33% |
+| **Média macro** | — | — | **94,44%** |
 
-## 6. Interpretação dos resultados
+## 6. Principais resultados observados
 
-O modelo apresentou desempenho muito consistente para Panela e Colher. Apesar disso, alguns acertos de Panela ocorreram com confiança moderada, como 53% e 71%, o que mostra que uma classificação correta não significa necessariamente alta certeza do modelo.
+- Colher foi classificada corretamente nos cinco testes inéditos, todos com 100% de confiança.
+- Panela foi corretamente classificada nos cinco testes, incluindo exemplos com confiança de 53%, 71%, 96% e 100%.
+- Garfo apresentou três acertos com 91%, 94% e 98%.
+- O único erro ocorreu quando um Garfo foi classificado como Colher com 54%, enquanto Garfo recebeu 46%.
 
-A maior dificuldade observada ocorreu entre Garfo e Colher. No único erro do conjunto recente, um Garfo foi classificado como Colher por uma diferença pequena de probabilidade (54% contra 46%). Esse comportamento é coerente com a semelhança visual entre essas classes, que compartilham formato alongado, material semelhante e proporções próximas em certas imagens.
+## 7. Interpretação dos resultados
 
-Fundos, iluminação, orientação e enquadramento também podem ter contribuído para as diferenças de confiança. Por isso, o desempenho deve ser interpretado em conjunto com as características das imagens de teste.
+O modelo apresentou desempenho consistente para Panela e Colher, mas a confiança variou em alguns acertos. Isso mostra que uma previsão correta não implica necessariamente alta certeza.
 
-## 7. Comparação com o modelo menor
+A maior dificuldade ocorreu entre Garfo e Colher, duas classes visualmente semelhantes em material, formato alongado e proporção. O único erro final ocorreu justamente entre essas classes.
 
-Também foram testados exemplos de um modelo anterior com apenas 10 imagens por classe. Esse modelo apresentou vários acertos isolados, mas também houve um caso de confusão relevante no qual uma imagem majoritariamente de colheres foi classificada como Garfo com 82% de confiança.
-
-Essa evidência reforça a importância de um conjunto de treinamento maior e mais variado.
+Fundos, iluminação, orientação e enquadramento também podem influenciar as probabilidades produzidas pelo modelo.
 
 ## 8. Análise crítica
 
-Pontos fortes observados:
+Pontos fortes:
 
-- treinamento equilibrado com 160 imagens por classe;
-- 100% de acerto nos testes recentes de Panela e Colher;
-- boa capacidade de generalização nos exemplos recentes;
-- identificação correta mesmo quando a confiança não foi máxima.
+- conjunto de treinamento equilibrado com 160 imagens por classe;
+- uso de imagens inéditas na avaliação final;
+- 92,86% de acurácia no conjunto testado;
+- 100% de acerto para Panela e Colher;
+- registro do erro em vez de removê-lo da análise.
 
 Pontos de atenção:
 
-- confusão entre Garfo e Colher em uma imagem;
-- confiança baixa ou moderada em alguns testes de Panela;
-- influência possível de fundo, iluminação e orientação;
-- número de testes ainda relativamente pequeno, devendo a acurácia ser interpretada como desempenho no conjunto avaliado.
+- confusão entre Garfo e Colher;
+- confiança moderada em alguns acertos de Panela;
+- conjunto de teste relativamente pequeno;
+- learning rate permaneceu em 0.001 nas configurações documentadas.
 
 ## 9. Melhorias propostas
 
-- aumentar a quantidade e diversidade de imagens de Garfo;
-- incluir mais exemplos de Garfo e Colher em fundos e ângulos semelhantes;
-- variar iluminação e distância;
-- adicionar objetos parcialmente ocultos;
-- ampliar o conjunto de testes futuros;
-- alterar um hiperparâmetro por vez em experimentos futuros;
-- manter rigorosamente separados os conjuntos de treinamento e teste.
+- ampliar e diversificar imagens de Garfo e Colher;
+- aumentar o conjunto de testes futuros;
+- variar fundos, iluminação, distância e ângulo;
+- incluir objetos parcialmente ocultos;
+- testar alterações no learning rate em experimentos futuros;
+- modificar um hiperparâmetro por vez para facilitar comparações;
+- manter treinamento e teste rigorosamente separados.
 
 ## 10. Conclusão
 
-O modelo demonstrou capacidade satisfatória de classificar Garfo, Panela e Colher. No conjunto recente de 14 testes únicos, foram registrados 13 acertos e 1 erro, correspondendo a uma acurácia observada de **92,86%**. Panela e Colher apresentaram 100% de acerto nesse conjunto, enquanto Garfo apresentou maior dificuldade, com um erro de classificação para Colher.
+O modelo desenvolvido no Google Teachable Machine atingiu o objetivo de classificar Garfo, Panela e Colher. Com 480 imagens de treinamento e 14 imagens inéditas de avaliação, foram obtidos 13 acertos e 1 erro, resultando em **92,86% de acurácia final**.
 
-Os resultados mostram que o Teachable Machine foi capaz de construir um classificador funcional com o conjunto preparado pelo grupo. Ao mesmo tempo, a ocorrência de um erro entre Garfo e Colher e as variações de confiança mostram a importância de utilizar imagens variadas e de avaliar o modelo com exemplos que não participaram do treinamento.
+A precisão formal foi de 100% para Garfo, 100% para Panela e 83,33% para Colher, com média macro de 94,44%. O único erro ocorreu entre Garfo e Colher, reforçando a necessidade de maior diversidade visual para separar melhor classes semelhantes.
 
-A acurácia de 92,86% deve ser apresentada como resultado do conjunto testado, e não como garantia de desempenho em qualquer imagem futura.
+O desempenho apresentado deve ser interpretado como o resultado do conjunto efetivamente testado, não como garantia de desempenho universal.
+
+## 11. Identificação acadêmica
+
+```text
+Fase: 1
+Capítulo: 2 - IA e seu mundo de possibilidades
+Arquivo final: Grupo_Cap2_IA_Fase1.pdf
+```
