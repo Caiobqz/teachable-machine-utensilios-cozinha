@@ -3,6 +3,8 @@
 ## Capa
 
 **Instituição:** FIAP  
+**Fase:** 1 — Raízes da Inteligência: preparando o terreno  
+**Capítulo:** 2 — IA e seu mundo de possibilidades  
 **Atividade:** Classificação de Utensílios de Cozinha com Inteligência Artificial  
 **Ano:** 2026
 
@@ -27,7 +29,7 @@ A visão computacional permite que sistemas de inteligência artificial identifi
 - aplicar conceitos básicos de aprendizado de máquina e visão computacional;
 - utilizar o Google Teachable Machine para treinamento e teste;
 - observar o impacto das configurações de treinamento;
-- avaliar acertos, erros, confiança e acurácia do modelo;
+- avaliar acertos, erros, confiança, precisão e acurácia do modelo;
 - identificar limitações e possibilidades de melhoria.
 
 ## 3. Metodologia
@@ -47,7 +49,7 @@ O projeto foi dividido em coleta de dados, treinamento, experimentação e avali
 
 As imagens foram selecionadas buscando boa iluminação, foco adequado e presença clara do utensílio principal. Também foram consideradas variações de ângulo, distância, posição, fundo e aparência dos objetos para reduzir a dependência de padrões específicos do cenário.
 
-Para que a avaliação represente a capacidade de generalização do modelo, as imagens de teste devem ser diferentes das imagens utilizadas durante o treinamento.
+Para garantir uma avaliação válida, as imagens utilizadas nos testes finais foram inéditas, ou seja, não faziam parte do conjunto de treinamento.
 
 ## 4. Configuração técnica do modelo
 
@@ -83,11 +85,11 @@ As seguintes configurações foram confirmadas por prints do modelo principal:
 
 A comparação considera não apenas se a classificação foi correta, mas também a confiança apresentada e a estabilidade do modelo diante de imagens diferentes.
 
-## 6. Testes com imagens novas
+## 6. Testes com imagens inéditas
 
-Nos envios mais recentes foram recebidos 15 prints. Um deles, referente a um Garfo classificado com 91%, era repetido. Para preservar a validade da avaliação, ele foi contabilizado apenas uma vez.
+Nos envios finais foram recebidos 15 prints. Um deles, referente a um Garfo classificado com 91%, era repetido. Para preservar a validade da avaliação, ele foi contabilizado apenas uma vez.
 
-Assim, foram considerados **14 testes únicos**:
+Assim, foram considerados **14 testes únicos e inéditos**:
 
 | Classe | Testes únicos | Acertos | Erros | Taxa de acerto |
 |---|---:|---:|---:|---:|
@@ -105,13 +107,13 @@ Principais exemplos registrados:
 
 ## 7. Resultados finais
 
-### 7.1 Resultado geral
+### 7.1 Acurácia geral
 
 ```text
 Total de testes únicos: 14
 Acertos: 13
 Erros: 1
-Acurácia observada: 92,86%
+Acurácia final: 92,86%
 ```
 
 A acurácia foi calculada pela fórmula:
@@ -122,8 +124,6 @@ Acurácia = (13 / 14) × 100
 Acurácia = 92,86%
 ```
 
-**Observação:** este resultado deve ser apresentado como acurácia final do experimento apenas se o grupo confirmar que essas imagens não faziam parte das 160 imagens utilizadas no treinamento de cada classe.
-
 ### 7.2 Desempenho por classe
 
 | Classe | Testes | Acertos | Erros | Acurácia |
@@ -132,11 +132,24 @@ Acurácia = 92,86%
 | Panela | 5 | 5 | 0 | 100% |
 | Colher | 5 | 5 | 0 | 100% |
 
+### 7.3 Precisão formal por classe
+
+A precisão foi calculada como `TP / (TP + FP)`, considerando as previsões feitas para cada classe.
+
+| Classe prevista | Verdadeiros positivos | Falsos positivos | Precisão |
+|---|---:|---:|---:|
+| Garfo | 3 | 0 | 100% |
+| Panela | 5 | 0 | 100% |
+| Colher | 5 | 1 | 83,33% |
+| **Média macro** | — | — | **94,44%** |
+
+A classe Colher apresentou precisão menor porque recebeu uma previsão incorreta proveniente de uma imagem de Garfo.
+
 ## 8. Justificativa técnica dos resultados
 
 O modelo apresentou comportamento consistente para Panela e Colher, com 100% de acerto nos testes únicos registrados dessas duas classes. Entretanto, a confiança das previsões variou. Uma Panela foi classificada corretamente com apenas 53%, enquanto a classe Colher recebeu 47%. Em outro teste de Panela, a confiança foi de 71% contra 29% para Colher. Isso demonstra que uma classificação correta não significa necessariamente alta certeza.
 
-A maior dificuldade observada envolveu Garfo e Colher. Ambas as classes possuem formato alongado, material semelhante e podem ocupar regiões parecidas da imagem. No único erro do lote recente, um Garfo foi classificado como Colher com 54%, enquanto Garfo ficou com 46%. A proximidade entre as probabilidades indica uma decisão incerta do modelo.
+A maior dificuldade observada envolveu Garfo e Colher. Ambas as classes possuem formato alongado, material semelhante e podem ocupar regiões parecidas da imagem. No único erro do lote final, um Garfo foi classificado como Colher com 54%, enquanto Garfo ficou com 46%. A proximidade entre as probabilidades indica uma decisão incerta do modelo.
 
 Fundos, iluminação, posição e orientação dos utensílios também podem modificar os padrões visuais percebidos pelo classificador. Dessa forma, a diversidade das imagens é um fator importante tanto no treinamento quanto na avaliação.
 
@@ -150,15 +163,17 @@ Probabilidade de Garfo: 46%
 Resultado: Erro
 ```
 
-Esse teste é importante porque evidencia uma limitação real do modelo. A diferença de apenas 8 pontos percentuais entre Colher e Garfo indica que o classificador encontrou características compatíveis com ambas as classes. A semelhança visual entre os utensílios e as condições da imagem podem ter contribuído para o resultado.
+Esse teste evidencia uma limitação real do modelo. A diferença de apenas 8 pontos percentuais entre Colher e Garfo indica que o classificador encontrou características compatíveis com ambas as classes.
 
 ## 10. Análise crítica
 
-Os resultados mostram que o modelo conseguiu classificar corretamente a maior parte das imagens testadas, alcançando 92,86% de acurácia no conjunto de 14 testes únicos. Panela e Colher tiveram os melhores resultados, sem erros no lote analisado.
+Os resultados mostram que o modelo conseguiu classificar corretamente a maior parte das imagens testadas, alcançando 92,86% de acurácia no conjunto de 14 testes únicos e inéditos. Panela e Colher tiveram os melhores resultados em taxa de acerto, sem erros no lote analisado.
 
 Garfo apresentou maior dificuldade. Embora três imagens tenham sido corretamente reconhecidas com confiança alta, uma imagem foi confundida com Colher. Esse resultado é coerente com a proximidade visual entre essas duas categorias e mostra que o modelo ainda pode ser melhorado com mais exemplos variados.
 
 Outro ponto relevante é a variação de confiança. Alguns exemplos foram classificados com 100%, enquanto outros acertos ocorreram com 53% ou 71%. Portanto, além da taxa de acerto, a distribuição das probabilidades também foi considerada na interpretação do desempenho.
+
+A precisão formal também reforça a análise: Garfo e Panela apresentaram 100% de precisão no conjunto avaliado, enquanto Colher apresentou 83,33% devido ao falso positivo originado pela imagem de Garfo classificada incorretamente.
 
 Como o conjunto de teste ainda é relativamente pequeno, a acurácia deve ser entendida como o desempenho observado nas imagens avaliadas, e não como garantia de que o modelo manterá o mesmo resultado em qualquer cenário.
 
@@ -170,15 +185,18 @@ Como o conjunto de teste ainda é relativamente pequeno, a acurácia deve ser en
 - incluir objetos parcialmente ocultos;
 - ampliar o conjunto de testes em uma versão futura;
 - alterar um hiperparâmetro por vez durante novos experimentos;
+- em futuros treinamentos, variar também o learning rate para ampliar a comparação entre configurações;
 - manter rigorosamente separados os conjuntos de treinamento e avaliação.
 
 ## 12. Conclusão
 
 O projeto atingiu o objetivo de desenvolver um modelo de classificação de utensílios de cozinha utilizando o Google Teachable Machine. O modelo principal foi treinado de maneira equilibrada, com 160 imagens por classe, totalizando 480 amostras de treinamento.
 
-No conjunto recente de 14 testes únicos, o modelo obteve 13 acertos e 1 erro, resultando em uma acurácia observada de **92,86%**. Panela e Colher alcançaram 100% de acerto nas imagens avaliadas, enquanto Garfo apresentou um caso de confusão com Colher.
+Na avaliação final com 14 imagens inéditas e únicas, o modelo obteve 13 acertos e 1 erro, resultando em uma acurácia de **92,86%**. Panela e Colher alcançaram 100% de acerto nas imagens avaliadas, enquanto Garfo apresentou um caso de confusão com Colher.
 
-A análise mostrou que o modelo é funcional, mas também revelou limitações importantes. A semelhança entre Garfo e Colher e a variação de confiança em algumas imagens indicam que mais diversidade de dados poderia aumentar a robustez do classificador. Dessa forma, além de demonstrar o funcionamento da ferramenta, o projeto permitiu observar na prática como qualidade dos dados, variedade visual e configuração de treinamento influenciam o desempenho de um sistema de visão computacional.
+Na métrica de precisão formal, Garfo e Panela atingiram 100% e Colher atingiu 83,33%, com média macro de 94,44%. Esses resultados mostram que o modelo é funcional, mas também revelam limitações importantes, especialmente na separação visual entre Garfo e Colher.
+
+A atividade permitiu observar na prática como qualidade dos dados, variedade visual, configuração de treinamento e escolha das imagens de teste influenciam o desempenho de um sistema de visão computacional.
 
 ---
 
@@ -190,12 +208,13 @@ A análise mostrou que o modelo é funcional, mas também revelou limitações i
 [x] modelo exportado
 [x] código Python modularizado
 [x] RMs dos integrantes registrados
-[x] evidências e prints organizados
-[x] acurácia observada calculada com os testes únicos
+[x] Fase 1 confirmada
+[x] Capítulo 2 confirmado
+[x] imagens finais confirmadas como inéditas
+[x] resultados únicos consolidados
+[x] acurácia final de 92,86%
+[x] precisão formal calculada
 [x] análise crítica atualizada
 [x] conclusão atualizada
-[ ] confirmar que as imagens dos testes recentes eram inéditas
-[ ] gerar print final do programa Python com os mesmos dados
-[ ] revisar e gerar o PDF definitivo
-[ ] nomear o arquivo conforme o padrão da faculdade
+[x] nome final do PDF definido: Grupo_Cap2_IA_Fase1.pdf
 ```
