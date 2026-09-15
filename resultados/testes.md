@@ -12,11 +12,11 @@ O modelo principal definido para a entrega é o treinado com **160 imagens por c
 
 O modelo exportado possui entrada de 224 x 224 pixels em RGB e três classes: Garfo, Panela e Colher.
 
-Mapeamento visual confirmado pelos exemplos carregados no projeto:
+Mapeamento observado na interface do Teachable Machine:
 
-- Class 1 = Panela;
-- Class 2 = Garfo;
-- Class 3 = Colher.
+- Class 1 = Panela
+- Class 2 = Garfo
+- Class 3 = Colher
 
 ## 2. Configurações de treinamento confirmadas
 
@@ -29,7 +29,7 @@ Não foram recebidas evidências suficientes para registrar como reais as config
 
 ## 3. Testes documentados - modelo de 160 imagens por classe
 
-### Configuração A - 50 epochs, batch 16, learning rate 0.001
+### 3.1 Evidências anteriores
 
 | Teste | Conteúdo da imagem | Classe esperada/predominante | Previsão | Confiança | Resultado |
 |---|---|---|---|---:|---|
@@ -40,59 +40,84 @@ Não foram recebidas evidências suficientes para registrar como reais as config
 | A5 | Conjunto de panelas de pressão | Panela | Panela | 100% | Acerto |
 | A6 | Panelas e frigideiras | Panela | Panela | 100% | Acerto |
 
-### Configuração B - 70 epochs, batch 32, learning rate 0.001
+### 3.2 Configuração B - 70 epochs, batch 32, learning rate 0.001
 
 | Teste | Conteúdo da imagem | Classe esperada | Previsão | Confiança | Outras probabilidades visíveis | Resultado |
 |---|---|---|---|---:|---|---|
 | B1 | Quatro garfos | Garfo | Garfo | 72% | Colher 15%; Panela 14% | Acerto |
 
-## 4. Novo lote de testes finais recebido
+## 4. Lote recente de testes com imagens novas
 
-Em 15/09/2026 foi recebido um novo lote com 9 imagens testadas no modelo principal de 160 imagens por classe.
+Os prints mais recentes foram organizados abaixo. Um print de Garfo com **91%** apareceu repetido em dois envios; ele foi contado apenas uma vez para não inflar artificialmente a amostra.
 
-**Importante:** estes testes podem ser usados no cálculo oficial somente após a confirmação de que as imagens abaixo não estavam entre as 160 imagens de treinamento de suas respectivas classes.
+### Colher
 
-| Teste | Classe real | Previsão | Confiança principal | Resultado |
+| Teste | Classe real | Previsão | Confiança | Resultado |
 |---|---|---|---:|---|
-| T1 | Colher | Colher | 100% | Acerto |
-| T2 | Colher | Colher | 100% | Acerto |
-| T3 | Colher | Colher | 100% | Acerto |
-| T4 | Panela | Panela | 53% | Acerto |
-| T5 | Panela | Panela | 100% | Acerto |
-| T6 | Garfo | Garfo | 91% | Acerto |
-| T7 | Garfo | Garfo | 94% | Acerto |
-| T8 | Garfo | Garfo | 98% | Acerto |
-| T9 | Panela | Panela | 96% | Acerto |
+| C1 | Colher | Colher | 100% | Acerto |
+| C2 | Colher | Colher | 100% | Acerto |
+| C3 | Colher | Colher | 100% | Acerto |
+| C4 | Colher | Colher | 100% | Acerto |
+| C5 | Colher | Colher | 100% | Acerto |
 
-### Resultado deste lote
+### Panela
+
+| Teste | Classe real | Previsão | Confiança | Observação | Resultado |
+|---|---|---|---:|---|---|
+| P1 | Panela | Panela | 53% | Colher recebeu 47% | Acerto |
+| P2 | Panela | Panela | 100% | - | Acerto |
+| P3 | Panela | Panela | 96% | - | Acerto |
+| P4 | Panela | Panela | 71% | Colher recebeu 29% | Acerto |
+| P5 | Panela | Panela | 100% | - | Acerto |
+
+### Garfo
+
+| Teste | Classe real | Previsão | Confiança | Observação | Resultado |
+|---|---|---|---:|---|---|
+| G1 | Garfo | Garfo | 91% | print repetido em envio posterior; contado uma vez | Acerto |
+| G2 | Garfo | Garfo | 94% | - | Acerto |
+| G3 | Garfo | Garfo | 98% | - | Acerto |
+| G4 | Garfo | Colher | 54% | Garfo recebeu 46% | **Erro** |
+
+## 5. Resultado do lote recente
+
+Considerando apenas os **14 testes únicos** visíveis nos prints recentes:
 
 ```text
-Total de testes: 9
-Acertos: 9
-Erros: 0
-Acurácia observada no lote: 100%
+Total de testes únicos: 14
+Acertos: 13
+Erros: 1
+Acurácia observada: 92,86%
 ```
 
-Desempenho por classe neste lote:
+Desempenho por classe:
 
-| Classe | Testes | Acertos | Erros | Taxa de acerto |
+| Classe | Testes únicos | Acertos | Erros | Taxa de acerto |
 |---|---:|---:|---:|---:|
-| Colher | 3 | 3 | 0 | 100% |
-| Panela | 3 | 3 | 0 | 100% |
-| Garfo | 3 | 3 | 0 | 100% |
+| Colher | 5 | 5 | 0 | 100% |
+| Panela | 5 | 5 | 0 | 100% |
+| Garfo | 4 | 3 | 1 | 75% |
+| **Total** | **14** | **13** | **1** | **92,86%** |
 
-Apesar da taxa de acerto de 100% neste lote, a confiança não foi uniforme. O caso mais relevante foi uma Panela reconhecida corretamente com apenas **53%**, enquanto Colher recebeu aproximadamente **47%**. Esse resultado é importante para a análise crítica, pois mostra que uma previsão correta pode ainda apresentar forte incerteza entre classes.
+**Importante:** esses números só devem ser apresentados como avaliação final oficial se o grupo confirmar que todas essas imagens eram inéditas, isto é, não estavam entre as 160 imagens usadas no treinamento.
 
-## 5. Observações importantes
+## 6. Análise dos resultados
 
-- A classe **Panela** apresentou classificações muito seguras em vários exemplos, normalmente entre 96% e 100%, mas houve um teste correto com apenas 53% de confiança.
-- Os três novos testes de Colher foram classificados corretamente com 100%.
-- Os três novos testes de Garfo foram classificados corretamente com 91%, 94% e 98%.
-- O teste de Garfo com a configuração 70/32/0.001 também foi correto, mas com confiança de 72%, mostrando maior incerteza naquele experimento.
-- Cenas com vários objetos não constituem um teste ideal de classificação de objeto único. Nelas, o modelo tende a selecionar a classe visualmente dominante.
-- Garfo e Colher são visualmente mais semelhantes entre si do que Panela, o que pode elevar a ambiguidade em alguns casos.
+O lote recente mostrou desempenho muito forte para Colher e Panela, ambas com 100% de acerto nas imagens testadas. Ainda assim, a confiança não foi sempre alta: duas imagens de Panela foram corretamente classificadas com apenas 53% e 71%, indicando que o modelo apresentou dúvida relevante em relação à classe Colher.
 
-## 6. Modelo de 10 imagens por classe - apenas comparação
+A principal dificuldade apareceu em Garfo. Em um dos testes, um garfo foi classificado como Colher com 54% de confiança, enquanto Garfo recebeu 46%. Esse erro é particularmente útil para a análise crítica porque confirma que Garfo e Colher são as classes visualmente mais próximas e que pequenas diferenças de fundo, ângulo, enquadramento ou iluminação podem alterar a decisão do modelo.
+
+O resultado de 92,86% no conjunto de 14 testes únicos é bom para um modelo simples de classificação treinado no Teachable Machine, mas deve ser interpretado como resultado do conjunto testado e não como uma medida universal do desempenho do modelo.
+
+## 7. Observações importantes
+
+- A classe **Panela** apresentou classificações corretas em todas as imagens recentes, embora com níveis de confiança bastante diferentes.
+- A classe **Colher** apresentou 100% de acerto nos cinco testes únicos recentes.
+- O único erro do lote recente ocorreu entre **Garfo e Colher**, reforçando a maior semelhança visual entre essas classes.
+- Prints repetidos não devem ser contados como testes diferentes.
+- Cenas com vários objetos não constituem um teste ideal de classificação de objeto único.
+
+## 8. Modelo de 10 imagens por classe - apenas comparação
 
 Também foram documentados testes de um modelo anterior com apenas 10 imagens de treinamento por classe. Esses resultados **não devem ser misturados** com o modelo principal de 160 imagens por classe.
 
@@ -106,29 +131,17 @@ Exemplos observados nesse modelo menor:
 | Colher | Colher | 93% | Acerto |
 | Garfo | Garfo | 100% | Acerto |
 
-Também foi observado anteriormente um caso em que uma imagem majoritariamente de colheres foi classificada como Garfo com 82%, evidenciando a possibilidade de confusão entre as duas classes.
+Também foi observado anteriormente um caso em que uma imagem majoritariamente de colheres foi classificada como Garfo com 82% de confiança, evidenciando a possibilidade de confusão entre as duas classes.
 
-## 7. Acurácia
-
-O novo lote possui distribuição equilibrada, com três testes de cada classe, e apresentou 9 acertos em 9 testes. Entretanto, para apresentar estes números como **acurácia oficial do trabalho**, é necessário confirmar que todas as 9 imagens eram inéditas, isto é, não foram usadas entre as 160 imagens de treinamento.
-
-Se essa condição for confirmada, a acurácia deste lote é:
-
-```text
-Acurácia = (9 / 9) x 100 = 100%
-```
-
-Para uma avaliação ainda mais robusta, recomenda-se ampliar para 10 imagens inéditas por classe, totalizando 30 testes.
-
-## 8. Evidências recomendadas para o PDF
+## 9. Evidências recomendadas para o PDF
 
 Usar no relatório:
 
 1. print mostrando as 160 imagens por classe;
 2. print da configuração 50 / 16 / 0.001;
-3. exemplos novos de Colher com 100%;
-4. exemplo de Panela com 53% para discutir incerteza;
-5. exemplo de Panela com 100% ou 96%;
-6. exemplos de Garfo com 91%, 94% ou 98%;
-7. print da configuração 70 / 32 / 0.001 com Garfo em 72%;
-8. print do programa Python quando a acurácia final for consolidada.
+3. pelo menos um teste correto de Colher;
+4. uma Panela classificada corretamente com confiança baixa (53% ou 71%);
+5. uma Panela classificada com 100%;
+6. um Garfo corretamente classificado com confiança alta;
+7. o Garfo classificado incorretamente como Colher com 54%, por ser o melhor exemplo para a análise crítica;
+8. print do programa Python quando os resultados finais forem registrados.
